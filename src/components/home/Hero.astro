@@ -4,23 +4,21 @@ import Workstation from "../Workstation.astro";
 
 <section class="hero" aria-labelledby="intro-title">
   <div>
-    <p class="eyebrow">
+    <p class="eyebrow" data-hero-copy>
       <span class="status-dot"></span> Hello, world. I'm Alfatta Rezqa.
     </p>
     <h1 id="intro-title">
-      BUILDING
-      <br />
-      THINGS FOR
-      <br />
-      <span>THE WEB.</span>
+      <span class="hero-line"><span data-hero-line>BUILDING</span></span>{" "}
+      <span class="hero-line"><span data-hero-line>THINGS FOR</span></span>{" "}
+      <span class="hero-line"><span data-hero-line>THE WEB.</span></span>
     </h1>
-    <p class="hero-intro">
+    <p class="hero-intro" data-hero-copy>
       A software developer turning ideas into thoughtful digital experiences.
       <br />A frontend focus. A full-stack curiosity.
       <br />
       <strong>And a soft spot for the details.</strong>
     </p>
-    <div class="hero-actions">
+    <div class="hero-actions" data-hero-copy>
       <a class="button primary" href="#work">
         Explore my work <span aria-hidden="true">↘</span>
       </a>
@@ -28,7 +26,7 @@ import Workstation from "../Workstation.astro";
         About me <span aria-hidden="true">⌘</span>
       </a>
     </div>
-    <p class="hero-note">
+    <p class="hero-note" data-hero-copy>
       <span class="pixel-heart" aria-hidden="true">
         ♥
       </span>{" "}
@@ -60,7 +58,17 @@ import Workstation from "../Workstation.astro";
     letter-spacing: 0.01em;
     margin: 25px 0 24px;
   }
-  .hero h1 span {
+  .hero-line {
+    display: block;
+    overflow: clip;
+    padding-block: 0.08em;
+    margin-block: -0.08em;
+  }
+  .hero-line > span {
+    display: block;
+    transform-origin: left bottom;
+  }
+  .hero-line:last-child {
     color: var(--accent);
   }
   .hero-intro {

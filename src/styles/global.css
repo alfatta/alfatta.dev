@@ -133,6 +133,7 @@
   text-transform: uppercase;
   font-size: 10px;
   font-weight: 700;
+  translate: var(--magnet-x, 0px) var(--magnet-y, 0px);
   transition:
     transform 0.15s,
     box-shadow 0.15s;
@@ -188,6 +189,12 @@
 }
 .text-link:hover {
   color: var(--accent);
+}
+.text-link > span {
+  transition: transform 0.18s ease-out;
+}
+.text-link:is(:hover, :focus-visible) > span {
+  transform: translateX(3px);
 }
 .window {
   border: 1px solid var(--line);
