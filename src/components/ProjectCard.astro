@@ -67,7 +67,7 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
 <style>
   .project-body--with-visual {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
   }
   .project-visual {
     min-width: 0;
@@ -80,7 +80,7 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 25px;
+    padding: 18px;
     overflow: clip;
     border-right: 1px solid var(--line);
   }
@@ -90,6 +90,9 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
   .project-visual-image {
     padding: 15px;
   }
+  .project-visual-image .project-art-track {
+    max-width: 420px;
+  }
   .project-visual-image img {
     width: 100%;
     aspect-ratio: 1.5;
@@ -97,15 +100,16 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
     image-rendering: pixelated;
   }
   .project-copy {
-    padding: 34px;
+    padding: 24px;
     min-width: 0;
+    align-self: center;
   }
   .project-copy h3 {
     font-family: var(--font-display);
     font-weight: 400;
     letter-spacing: 0.01em;
     font-size: 46px;
-    margin: 10px 0 15px;
+    margin: 8px 0 12px;
   }
   .project-copy p {
     font-size: 12px;
@@ -115,7 +119,7 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
     display: flex;
     flex-wrap: wrap;
     gap: 7px;
-    margin: 20px 0;
+    margin: 16px 0;
   }
   .tag {
     border: 1px solid var(--line);
@@ -129,7 +133,7 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
   }
   @media (max-width: 900px) {
     .project-copy {
-      padding: 25px;
+      padding: 20px;
     }
   }
   @media (max-width: 600px) {

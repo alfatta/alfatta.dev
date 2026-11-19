@@ -52,18 +52,18 @@ import PixelIcon from "../PixelIcon.astro";
   .about-preview {
     display: grid;
     grid-template-columns: 1.1fr 1.9fr;
-    gap: 40px;
+    gap: 24px;
     align-items: center;
   }
   .about-preview h2 {
     font-size: 42px;
     text-transform: uppercase;
-    margin: 15px 0;
+    margin: 10px 0;
   }
   .about-preview p {
     font-size: 12px;
     color: var(--muted);
-    margin-bottom: 20px;
+    margin-bottom: 14px;
   }
   .capabilities {
     display: grid;
@@ -73,7 +73,7 @@ import PixelIcon from "../PixelIcon.astro";
   .capability {
     background: var(--surface);
     border: 1px solid var(--line);
-    padding: 25px 15px;
+    padding: 18px 12px;
     text-align: center;
     position: relative;
   }
@@ -91,12 +91,12 @@ import PixelIcon from "../PixelIcon.astro";
   .capability :global(svg) {
     width: 54px;
     height: 54px;
-    margin: 0 auto 20px;
+    margin: 0 auto 12px;
   }
   .capability h3 {
     text-transform: uppercase;
     font-size: 10px;
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
   .capability p {
     font-size: 10px;
@@ -106,7 +106,7 @@ import PixelIcon from "../PixelIcon.astro";
   @media (max-width: 900px) {
     .about-preview {
       grid-template-columns: 1fr;
-      gap: 22px;
+      gap: 18px;
     }
     .about-preview > div:first-child {
       max-width: 550px;
@@ -117,7 +117,7 @@ import PixelIcon from "../PixelIcon.astro";
       gap: 8px;
     }
     .capability {
-      padding: 20px 8px;
+      padding: 16px 8px;
     }
     .capability p {
       font-size: 9px;
