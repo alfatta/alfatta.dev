@@ -19,6 +19,8 @@ The portfolio includes my contributions to **Ajaib Terminal**, a desktop stock t
 
 The site takes inspiration from retro desktops: window-style panels, pixel-art illustrations, and monospace typography. It's a personal corner of the web for both the work and the person behind it.
 
+Layouts use a 1200px content cap, compact panel padding, and 40px section spacing (30px on mobile). Article reading widths stay constrained independently.
+
 Motion uses **GSAP + ScrollTrigger**: masked hero-title lines, a layered workstation assembly and screen-boot sequence, window-opening reveals, staggered cards, and scroll-linked project artwork. Fine-pointer desktop layouts also get layered parallax, artwork tilt, and lightly magnetic buttons; touch layouts omit pointer-following effects. The shared choreography lives in `src/scripts/site-motion.ts`, imported by `SiteLayout.astro`. `data-reveal` opts elements into entrances; `data-depth` enables pointer depth on artwork, and `data-scroll-art` marks its separate scroll-motion wrapper. Content remains visible without JavaScript, keyboard focus completes an entrance immediately, and GSAP's media contexts revert animations and remove pointer listeners when reduced motion is enabled. Scrolling stays native; no pinning or scroll hijacking.
 
 The workstation assembles over roughly 2.2 seconds (1.05 seconds per layer, staggered by 0.14 seconds), then the screen boots and code appears.

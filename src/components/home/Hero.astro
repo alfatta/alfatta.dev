@@ -43,7 +43,7 @@ import Workstation from "../Workstation.astro";
     grid-template-columns: 1.06fr 1fr;
     align-items: center;
     gap: 22px;
-    padding-block: 62px 44px;
+    padding-block: 36px 28px;
   }
   .status-dot {
     width: 7px;
@@ -53,10 +53,10 @@ import Workstation from "../Workstation.astro";
     flex: none;
   }
   .hero h1 {
-    font-size: clamp(68px, 8vw, 104px);
+    font-size: clamp(48px, 7.4vw, 96px);
     line-height: 0.9;
     letter-spacing: 0.01em;
-    margin: 25px 0 24px;
+    margin: 18px 0;
   }
   .hero-line {
     display: block;
@@ -74,13 +74,13 @@ import Workstation from "../Workstation.astro";
   .hero-intro {
     max-width: 420px;
     font-size: 13px;
-    line-height: 1.9;
+    line-height: 1.75;
   }
   .hero-intro strong {
     color: var(--accent);
   }
   .hero-note {
-    margin-top: 25px;
+    margin-top: 18px;
     color: var(--muted);
     font-size: 9px;
     display: flex;
@@ -91,20 +91,9 @@ import Workstation from "../Workstation.astro";
     font-size: 17px;
     color: var(--accent);
   }
-  @media (min-width: 1300px) {
-    .hero {
-      padding-block: 75px 60px;
-    }
-    .hero h1 {
-      font-size: 104px;
-    }
-  }
   @media (max-width: 900px) {
     .hero {
       gap: 0;
-    }
-    .hero h1 {
-      font-size: 76px;
     }
     .hero-intro {
       font-size: 12px;
@@ -113,18 +102,18 @@ import Workstation from "../Workstation.astro";
   @media (max-width: 600px) {
     .hero {
       grid-template-columns: 1fr;
-      padding-block: 36px 26px;
-      gap: 25px;
+      padding-block: 24px 20px;
+      gap: 18px;
     }
     .hero h1 {
       font-size: clamp(62px, 18vw, 80px);
-      margin: 22px 0;
+      margin: 16px 0;
     }
     .hero-intro {
       max-width: 350px;
     }
     .hero-note {
-      margin-top: 20px;
+      margin-top: 16px;
     }
   }
 </style>
