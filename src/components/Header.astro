@@ -4,12 +4,12 @@ import ThemeToggle from "./ThemeToggle.astro";
 const pathname = Astro.url.pathname;
 ---
 
-<a class="skip-link" href="#main">
+<a class="skip-link" href="#main" data-track-event="navigation_click" data-track-location="header" data-track-id="skip-to-content">
   Skip to content
 </a>
-<header class="site-header">
+<header class="site-header" data-track-location="header">
   <nav class="site-width nav" aria-label="Main navigation">
-    <a class="brand" href="/">
+    <a class="brand" href="/" data-track-event="navigation_click" data-track-id="logo">
       <PixelIcon name="monitor" class="brand-icon" />
       <span>
         alfatta.rezqa<small>SOFTWARE DEVELOPER</small>
@@ -25,6 +25,8 @@ const pathname = Astro.url.pathname;
         <a
           class="nav-link"
           href={href}
+          data-track-event="navigation_click"
+          data-track-id={`nav-${label.toLowerCase()}`}
           aria-current={
             (href === "/" ? pathname === "/" : pathname.startsWith(href))
               ? "page"

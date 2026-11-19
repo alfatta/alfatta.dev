@@ -22,6 +22,10 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
   class:list={["post-card", { "post-card--detailed": variant === "detailed" }]}
   href={`/blog/${post.id}/`}
   data-reveal
+  data-track-event="post_click"
+  data-track-location={variant === "detailed" ? "blog-list" : "recent-posts"}
+  data-track-id={`post-${post.id}`}
+  data-track-post-slug={post.id}
 >
   <div class="post-art" data-depth>
     <PixelIcon name={icons[index % icons.length]} />

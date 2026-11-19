@@ -44,6 +44,9 @@ import {
             href="https://www.linkedin.com/in/alfattarezqa/details/experience/"
             target="_blank"
             rel="noreferrer"
+            data-track-event="experience_link_click"
+            data-track-location="work-experience"
+            data-track-id="linkedin-experience"
           >
             View on LinkedIn <span aria-hidden="true">↗</span>
           </a>
@@ -99,13 +102,16 @@ import {
           <h2 id="elsewhere-title">Let's stay connected</h2>
         </div>
       </div>
-      <div class="hero-actions">
+      <div class="hero-actions" data-track-location="about-social">
         {contactLinks.map((contact) => (
           <a
             class="button"
             href={contact.href}
             target={contact.kind === "social" ? "_blank" : undefined}
             rel="noreferrer"
+            data-track-event={contact.kind === "email" ? "email_click" : "social_click"}
+            data-track-id={contact.id}
+            data-track-platform={contact.kind === "social" ? contact.id : undefined}
           >
             {contact.label}
             <span aria-hidden="true">↗</span>

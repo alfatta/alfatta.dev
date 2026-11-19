@@ -8,7 +8,7 @@ const { project } = Astro.props;
 const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
 ---
 
-<article class="window" data-reveal>
+<article class="window" data-reveal data-track-location="project">
   <WindowBar>
     <span>▧ &nbsp; {project.windowTitle}</span>
   </WindowBar>
@@ -53,6 +53,9 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
           <a
             class="text-link"
             href={link.href}
+            data-track-event="project_link_click"
+            data-track-id={`${project.id}:${link.label}`}
+            data-track-project-id={project.id}
             target="_blank"
             rel="noreferrer"
           >

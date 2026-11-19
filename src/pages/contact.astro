@@ -26,7 +26,7 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
           <h2 id="email-title">Send a hello</h2>
           <span slot="trailing" aria-hidden="true">hello.mail</span>
         </WindowBar>
-        <div class="window-content email-content">
+        <div class="window-content email-content" data-track-location="contact-email">
           <PixelIcon name="mail" class="contact-icon" />
           <div class="contact-identity">
             <p class="contact-name">{ABOUT.name}</p>
@@ -36,8 +36,8 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
             Good things start with a hello. Drop me an email and let's take it
             from there.
           </p>
-          <a class="email-address" href={emailContact.href}>{emailContact.handle}</a>
-          <a class="button primary" href={emailContact.href}>
+          <a class="email-address" href={emailContact.href} data-track-event="email_click" data-track-id="email-address">{emailContact.handle}</a>
+          <a class="button primary" href={emailContact.href} data-track-event="email_click" data-track-id="write-email">
             Write an email <span aria-hidden="true">↗</span>
           </a>
           <p class="email-note">Opens your email app. No forms, just a conversation.</p>
@@ -49,12 +49,13 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
           <h2 id="social-title">Around the internet</h2>
           <span slot="trailing" aria-hidden="true">social.links</span>
         </WindowBar>
-        <div class="window-content social-content">
+        <div class="window-content social-content" data-track-location="contact-social">
           <p class="social-intro">Connect, follow along, or see what I'm working on.</p>
           <ul class="social-list">
             {socialLinks.map((contact) => (
               <li>
-                <a class="social-link" href={contact.href} target="_blank" rel="noreferrer">
+                <a class="social-link" href={contact.href} target="_blank" rel="noreferrer"
+                  data-track-event="social_click" data-track-id={contact.id} data-track-platform={contact.id}>
                   <div class="social-heading">
                     <h3>{contact.label}</h3>
                     <span aria-hidden="true">↗</span>
@@ -73,7 +74,7 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
     <div class="contact-signoff" data-reveal>
       <PixelIcon name="monitor" class="signoff-icon" />
       <p>Until then, see you around the internet.</p>
-      <a class="text-link" href="/about/">A little about me <span aria-hidden="true">→</span></a>
+      <a class="text-link" href="/about/" data-track-event="cta_click" data-track-location="contact-signoff" data-track-id="about-me">A little about me <span aria-hidden="true">→</span></a>
     </div>
   </main>
 </SiteLayout>

@@ -26,7 +26,7 @@ const posts = (await getCollection("blog")).sort(
       <span class="eyebrow">
         {String(posts.length).padStart(2, "0")} ENTRIES / NEWEST FIRST
       </span>
-      <a class="text-link" href="/rss.xml">
+      <a class="text-link" href="/rss.xml" data-track-event="rss_click" data-track-location="blog-list" data-track-id="rss">
         RSS feed ↗
       </a>
     </div>
