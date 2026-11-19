@@ -1,11 +1,9 @@
 ---
 import SiteLayout from "../layouts/SiteLayout.astro";
 import PixelIcon from "../components/PixelIcon.astro";
+import WindowBar from "../components/WindowBar.astro";
 import { SITE_TITLE } from "../consts";
-import { ABOUT, contacts } from "../data/profile";
-
-const mail = contacts.find((contact) => contact.href.startsWith("mailto:"))!;
-const socials = contacts.filter((contact) => contact.href.startsWith("https://"));
+import { ABOUT, emailContact, socialLinks } from "../data/profile";
 ---
 
 <SiteLayout
@@ -24,10 +22,10 @@ const socials = contacts.filter((contact) => contact.href.startsWith("https://")
 
     <div class="contact-grid">
       <section class="window email-window" aria-labelledby="email-title">
-        <div class="window-bar">
+        <WindowBar>
           <h2 id="email-title">Send a hello</h2>
-          <span aria-hidden="true">hello.mail</span>
-        </div>
+          <span slot="trailing" aria-hidden="true">hello.mail</span>
+        </WindowBar>
         <div class="window-content email-content">
           <PixelIcon name="mail" class="contact-icon" />
           <div class="contact-identity">
@@ -38,8 +36,8 @@ const socials = contacts.filter((contact) => contact.href.startsWith("https://")
             Good things start with a hello. Drop me an email and let's take it
             from there.
           </p>
-          <a class="email-address" href={mail.href}>{mail.handle}</a>
-          <a class="button primary" href={mail.href}>
+          <a class="email-address" href={emailContact.href}>{emailContact.handle}</a>
+          <a class="button primary" href={emailContact.href}>
             Write an email <span aria-hidden="true">↗</span>
           </a>
           <p class="email-note">Opens your email app. No forms, just a conversation.</p>
@@ -47,14 +45,14 @@ const socials = contacts.filter((contact) => contact.href.startsWith("https://")
       </section>
 
       <section class="window social-window" aria-labelledby="social-title">
-        <div class="window-bar">
+        <WindowBar>
           <h2 id="social-title">Around the internet</h2>
-          <span aria-hidden="true">social.links</span>
-        </div>
+          <span slot="trailing" aria-hidden="true">social.links</span>
+        </WindowBar>
         <div class="window-content social-content">
           <p class="social-intro">Connect, follow along, or see what I'm working on.</p>
           <ul class="social-list">
-            {socials.map((contact) => (
+            {socialLinks.map((contact) => (
               <li>
                 <a class="social-link" href={contact.href} target="_blank" rel="noreferrer">
                   <div class="social-heading">

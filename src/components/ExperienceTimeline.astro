@@ -1,5 +1,5 @@
 ---
-import type { WorkExperience } from "../data/profile";
+import { groupExperiencesByCompany, type WorkExperience } from "../data/experience";
 import ExperienceHeading from "./ExperienceHeading.astro";
 import ExperienceItem from "./ExperienceItem.astro";
 
@@ -8,12 +8,7 @@ interface Props {
 }
 
 const { experiences } = Astro.props;
-const companyGroups = [
-  ...new Set(experiences.map((experience) => experience.company)),
-].map((company) => ({
-  company,
-  roles: experiences.filter((experience) => experience.company === company),
-}));
+const companyGroups = groupExperiencesByCompany(experiences);
 ---
 
 <ol class="timeline">

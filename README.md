@@ -20,3 +20,10 @@ The portfolio includes my contributions to **Ajaib Terminal**, a desktop stock t
 The site takes inspiration from retro desktops: window-style panels, pixel-art illustrations, and monospace typography. It's a personal corner of the web for both the work and the person behind it.
 
 Built with Astro and Tailwind CSS, with Markdown and MDX for writing.
+
+## Inside the site
+
+- `src/pages/` composes the pages; `src/layouts/` provides the shared site and article layouts.
+- `src/data/profile.ts` holds profile details, typed contact links, and portfolio projects. `src/data/experience.ts` holds career history and the selectors that preserve its curated order.
+- `src/components/` contains the reusable UI, including the shared window bar and theme toggle. Theme initialization stays in the document head so the saved preference is applied before the page appears.
+- `src/content/blog/` contains the writing; shared colors, typography, and layout styles live in `src/styles/global.css`.

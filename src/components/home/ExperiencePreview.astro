@@ -1,22 +1,13 @@
 ---
 import ExperienceHeading from "../ExperienceHeading.astro";
-import type { WorkExperience } from "../../data/profile";
+import type { WorkExperience } from "../../data/experience";
+import WindowBar from "../WindowBar.astro";
 
 interface Props {
   experiences: WorkExperience[];
 }
 
 const { experiences } = Astro.props;
-const engineeringExperiences = experiences.filter(
-  (experience) => experience.category === "engineering",
-);
-const featuredExperiences = engineeringExperiences
-  .filter(
-    (experience, index, experiences) =>
-      experiences.findIndex((item) => item.company === experience.company) ===
-      index,
-  )
-  .slice(0, 3);
 ---
 
 <section class="section" aria-labelledby="experience-preview-title">
@@ -30,12 +21,12 @@ const featuredExperiences = engineeringExperiences
     </a>
   </div>
   <div class="window">
-    <div class="window-bar">
+    <WindowBar>
       <span>▤ &nbsp; career.log</span>
-      <span>RECENT COMPANIES</span>
-    </div>
+      <span slot="trailing">RECENT COMPANIES</span>
+    </WindowBar>
     <ol class="experience-preview-list">
-      {featuredExperiences.map((experience) => (
+      {experiences.map((experience) => (
         <li>
           <a class="experience-preview-row" href="/about/#experience-title">
             <div class="experience-preview-date">

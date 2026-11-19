@@ -3,6 +3,7 @@ import SiteLayout from "./SiteLayout.astro";
 import type { CollectionEntry } from "astro:content";
 import FormattedDate from "../components/FormattedDate.astro";
 import ContactBanner from "../components/ContactBanner.astro";
+import WindowBar from "../components/WindowBar.astro";
 import { SITE_TITLE } from "../consts";
 import { ABOUT } from "../data/profile";
 type Props = CollectionEntry<"blog">["data"];
@@ -21,14 +22,9 @@ const { title, description, pubDate, updatedDate, heroImageUrl } = Astro.props;
       ← All notes
     </a>
     <article class="window">
-      <div class="window-bar">
+      <WindowBar>
         <span>▤ &nbsp; from-the-keyboard.md</span>
-        <span class="window-controls" aria-hidden="true">
-          <span>−</span>
-          <span>□</span>
-          <span>×</span>
-        </span>
-      </div>
+      </WindowBar>
       <header class="article-header">
         <div class="article-date">
           <a href="/about/" rel="author">
