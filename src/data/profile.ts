@@ -95,8 +95,8 @@ export const emailContact: EmailContact = {
   id: "email",
   kind: "email",
   label: "Mail",
-  href: "mailto:hi@alfattarezqa.com",
-  handle: "hi@alfattarezqa.com",
+  href: "mailto:hello@alfatta.dev",
+  handle: "hello@alfatta.dev",
   description: "For ideas, questions, and a simple hello.",
 };
 

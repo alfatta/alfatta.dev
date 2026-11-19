@@ -7,7 +7,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://alfattarezqa.com',
+	site: 'https://alfatta.dev',
 	trailingSlash: 'always',
 	integrations: [mdx(), sitemap()],
 	vite: {
