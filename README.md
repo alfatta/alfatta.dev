@@ -33,3 +33,27 @@ Built with Astro and Tailwind CSS, with Markdown and MDX for writing.
 - `src/data/profile.ts` holds profile details, typed contact links, and portfolio projects. `src/data/experience.ts` holds career history and the selectors that preserve its curated order.
 - `src/components/` contains the reusable UI, including the shared window bar and theme toggle. Theme initialization stays in the document head so the saved preference is applied before the page appears.
 - `src/content/blog/` contains the writing; shared colors, typography, and layout styles live in `src/styles/global.css`.
+- `src/components/BaseHead.astro` loads the deferred Umami Cloud tracking script on every page.
+
+## Analytics
+
+Umami keeps its automatic pageviews. `src/scripts/analytics.ts` additionally sends `page_load` once after each document's `load` event, including individual blog articles.
+
+| Event | Interaction |
+| --- | --- |
+| `navigation_click` | Logo, main navigation, skip-to-content, footer Contact |
+| `theme_change` | Theme toggle; records the applied theme |
+| `cta_click` | Hero, About/Experience previews, experience rows, All posts, Contact banners, Contact signoff |
+| `project_link_click` | Project destinations, including Ajaib Terminal and PixRelay |
+| `experience_link_click` | Work/teaching links and LinkedIn experience |
+| `post_click` | Article cards on Home and Blog |
+| `article_link_click` | Article body links, author, and back-to-blog |
+| `email_click` | Email address and email CTAs |
+| `social_click` | Social profiles on About, Contact, and the footer |
+| `rss_click` | Blog and footer RSS links |
+
+Every custom event includes `page_path` and `page_type`; article pages also include `post_slug`. Click events add `location`, `element_id`, and, for links, `destination`. Relevant events also include `project_id`, `platform`, `theme`, or the clicked article's `post_slug`. Destinations omit query values; non-HTTP destinations record only their protocol, such as `mailto:`.
+
+Mark new links/buttons with `data-track-event` and a stable `data-track-id`; set `data-track-location` on the control or a surrounding region. Optional `data-track-post-slug`, `data-track-project-id`, and `data-track-platform` attach event-specific data. Article body links are handled automatically through `data-track-article`.
+
+A single delegated handler records primary/keyboard clicks and middle-clicked links without delaying navigation. It reads the theme after the toggle's handler runs and waits for the Umami script when necessary. Do not also add `data-umami-event` to these controls: that would record the same click twice. Decorative areas are not tracked.

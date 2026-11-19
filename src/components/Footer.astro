@@ -2,25 +2,28 @@
 import { contactLinks } from "../data/profile";
 ---
 
-<footer class="site-width site-footer">
+<footer class="site-width site-footer" data-track-location="footer">
   <p>
     © {new Date().getFullYear()} Alfatta Rezqa. Built with care & a little
     nostalgia.
   </p>
   <div class="footer-links">
-    <a href="/contact/">Contact</a>
+    <a href="/contact/" data-track-event="navigation_click" data-track-id="contact">Contact</a>
     {contactLinks
       .filter((contact) => ["linkedin", "x", "email"].includes(contact.id))
       .map((contact) => (
         <a
           href={contact.href}
+          data-track-event={contact.kind === "email" ? "email_click" : "social_click"}
+          data-track-id={contact.id}
+          data-track-platform={contact.kind === "social" ? contact.id : undefined}
           target={contact.kind === "social" ? "_blank" : undefined}
           rel="noreferrer"
         >
           {contact.label} ↗
         </a>
       ))}
-    <a href="/rss.xml">RSS ↗</a>
+    <a href="/rss.xml" data-track-event="rss_click" data-track-id="rss">RSS ↗</a>
   </div>
 </footer>
 

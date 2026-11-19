@@ -2,7 +2,7 @@
 import Workstation from "../Workstation.astro";
 ---
 
-<section class="hero" aria-labelledby="intro-title">
+<section class="hero" aria-labelledby="intro-title" data-track-location="hero">
   <div>
     <p class="eyebrow" data-hero-copy>
       <span class="status-dot"></span> Hello, world. I'm Alfatta Rezqa.
@@ -19,10 +19,10 @@ import Workstation from "../Workstation.astro";
       <strong>And a soft spot for the details.</strong>
     </p>
     <div class="hero-actions" data-hero-copy>
-      <a class="button primary" href="#work">
+      <a class="button primary" href="#work" data-track-event="cta_click" data-track-id="explore-work">
         Explore my work <span aria-hidden="true">↘</span>
       </a>
-      <a class="button" href="/about/">
+      <a class="button" href="/about/" data-track-event="cta_click" data-track-id="about-me">
         About me <span aria-hidden="true">⌘</span>
       </a>
     </div>
