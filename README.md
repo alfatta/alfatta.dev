@@ -1,63 +1,29 @@
-# Astro Starter Kit: Blog
+# alfattarezqa.com
 
-```sh
-pnpm create astro@latest -- --template blog
-```
+My personal website, portfolio, and blog — a place to share the software I work on, my experience, and things I learn along the way.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+I'm **Alfatta Rezqa**, a software developer with a frontend focus and a full-stack toolkit.
 
-Features:
+**[Visit alfattarezqa.com](https://alfattarezqa.com)**
 
-- ✅ Minimal styling (make it your own!)
-- ✅ 100/100 Lighthouse performance
-- ✅ SEO-friendly with canonical URLs and Open Graph data
-- ✅ Sitemap support
-- ✅ RSS Feed support
-- ✅ Markdown & MDX support
+## What's here
 
-## 🚀 Project Structure
+- **[Home](https://alfattarezqa.com/)** — an introduction, current work, experience highlights, featured professional work, and recent writing.
+- **[About](https://alfattarezqa.com/about/)** — my engineering background, teaching and mentoring experience, toolkit, and side projects.
+- **[Blog](https://alfattarezqa.com/blog/)** — notes on frontend development, Vue, personal tooling, and lessons from building software. Also available via [RSS](https://alfattarezqa.com/rss.xml).
+- **[Contact](https://alfattarezqa.com/contact/)** — ways to reach me and connect elsewhere online.
 
-Inside of your Astro project, you'll see the following folders and files:
+The portfolio includes my contributions to **Ajaib Terminal**, a desktop stock trading application built with the Ajaib team, and **PixRelay**, an image processing service.
 
-```text
-├── public/
-├── src/
-│   ├── assets/
-│   ├── components/
-│   ├── content/
-│   ├── layouts/
-│   └── pages/
-├── astro.config.mjs
-├── README.md
-├── package.json
-└── tsconfig.json
-```
+## A little personality
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+The site takes inspiration from retro desktops: window-style panels, pixel-art illustrations, and monospace typography. It's a personal corner of the web for both the work and the person behind it.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Built with Astro and Tailwind CSS, with Markdown and MDX for writing.
 
-The `src/content/` directory contains "collections" of related Markdown and MDX documents. Use `getCollection()` to retrieve posts from `src/content/blog/`, and type-check your frontmatter using an optional schema. See [Astro's Content Collections docs](https://docs.astro.build/en/guides/content-collections/) to learn more.
+## Inside the site
 
-Any static assets, like images, can be placed in the `public/` directory.
-
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Check out [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
-
-## Credit
-
-This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+- `src/pages/` composes the pages; `src/layouts/` provides the shared site and article layouts.
+- `src/data/profile.ts` holds profile details, typed contact links, and portfolio projects. `src/data/experience.ts` holds career history and the selectors that preserve its curated order.
+- `src/components/` contains the reusable UI, including the shared window bar and theme toggle. Theme initialization stays in the document head so the saved preference is applied before the page appears.
+- `src/content/blog/` contains the writing; shared colors, typography, and layout styles live in `src/styles/global.css`.

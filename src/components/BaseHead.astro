@@ -1,7 +1,7 @@
 ---
 import type { ImageMetadata } from "astro";
 import { SITE_TITLE } from "../consts";
-import { ABOUT, contacts } from "../data/profile";
+import { ABOUT, socialLinks } from "../data/profile";
 
 interface Props {
   title: string;
@@ -41,9 +41,7 @@ const structuredData = {
       name: ABOUT.name,
       url: authorURL.href,
       jobTitle: ABOUT.jobTitle,
-      sameAs: contacts
-        .filter((contact) => contact.href.startsWith("https://"))
-        .map((contact) => contact.href),
+      sameAs: socialLinks.map((contact) => contact.href),
     },
     {
       "@type": "WebSite",

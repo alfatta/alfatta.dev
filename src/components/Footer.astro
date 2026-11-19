@@ -1,5 +1,5 @@
 ---
-import { contacts } from "../data/profile";
+import { contactLinks } from "../data/profile";
 ---
 
 <footer class="site-width site-footer">
@@ -9,15 +9,15 @@ import { contacts } from "../data/profile";
   </p>
   <div class="footer-links">
     <a href="/contact/">Contact</a>
-    {contacts
-      .filter((c) => ["LinkedIn", "X", "Mail"].includes(c.label))
-      .map((c) => (
+    {contactLinks
+      .filter((contact) => ["linkedin", "x", "email"].includes(contact.id))
+      .map((contact) => (
         <a
-          href={c.href}
-          target={c.href.startsWith("mailto:") ? undefined : "_blank"}
+          href={contact.href}
+          target={contact.kind === "social" ? "_blank" : undefined}
           rel="noreferrer"
         >
-          {c.label} ↗
+          {contact.label} ↗
         </a>
       ))}
     <a href="/rss.xml">RSS ↗</a>

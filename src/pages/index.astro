@@ -9,13 +9,16 @@ import ContactBanner from "../components/ContactBanner.astro";
 import PostCard from "../components/PostCard.astro";
 import { getCollection } from "astro:content";
 import { SITE_DESCRIPTION } from "../consts";
-import { workExperiences, featuredProject } from "../data/profile";
+import { featuredProject } from "../data/profile";
+import {
+  currentExperience,
+  engineeringExperiences,
+  getRecentCompanies,
+} from "../data/experience";
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
-const currentExperience = workExperiences.find(
-  (experience) => experience.category === "engineering" && experience.current,
-);
+const recentCompanies = getRecentCompanies(engineeringExperiences);
 ---
 
 <SiteLayout
@@ -26,7 +29,7 @@ const currentExperience = workExperiences.find(
     <Hero />
     {currentExperience && <CurrentWork company={currentExperience.company} />}
     <AboutPreview />
-    <ExperiencePreview experiences={workExperiences} />
+    <ExperiencePreview experiences={recentCompanies} />
     <section class="section" id="work" aria-labelledby="work-title">
       <div class="section-title">
         <div>

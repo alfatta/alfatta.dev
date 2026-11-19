@@ -5,21 +5,18 @@ import ProjectCard from "../components/ProjectCard.astro";
 import PixelIcon from "../components/PixelIcon.astro";
 import ExperienceTimeline from "../components/ExperienceTimeline.astro";
 import ContactBanner from "../components/ContactBanner.astro";
+import WindowBar from "../components/WindowBar.astro";
 import { SITE_TITLE } from "../consts";
 import {
   ABOUT,
-  contacts,
-  projects,
+  contactLinks,
+  sideProjects,
   techStacks,
-  workExperiences,
 } from "../data/profile";
-
-const engineeringExperiences = workExperiences.filter(
-  (experience) => experience.category === "engineering",
-);
-const teachingExperiences = workExperiences.filter(
-  (experience) => experience.category === "teaching",
-);
+import {
+  engineeringExperiences,
+  teachingExperiences,
+} from "../data/experience";
 ---
 
 <SiteLayout
@@ -36,10 +33,10 @@ const teachingExperiences = workExperiences.filter(
     </header>
     <div class="about-grid">
       <section class="window" aria-labelledby="experience-title">
-        <div class="window-bar">
+        <WindowBar>
           <h2 id="experience-title">Work experience</h2>
-          <span>experience.log</span>
-        </div>
+          <span slot="trailing">experience.log</span>
+        </WindowBar>
         <div class="window-content">
           <ExperienceTimeline experiences={engineeringExperiences} />
           <a
@@ -54,10 +51,10 @@ const teachingExperiences = workExperiences.filter(
       </section>
       <div class="about-sidebar">
         <section class="window" aria-labelledby="stack-title">
-          <div class="window-bar">
+          <WindowBar>
             <h2 id="stack-title">The toolkit</h2>
-            <span>stack.config</span>
-          </div>
+            <span slot="trailing">stack.config</span>
+          </WindowBar>
           <div class="window-content">
             <PixelIcon class="about-stack-art" name="chip" />
             <div class="stack-list">
@@ -68,10 +65,10 @@ const teachingExperiences = workExperiences.filter(
           </div>
         </section>
         <section class="window" aria-labelledby="teaching-title">
-          <div class="window-bar">
+          <WindowBar>
             <h2 id="teaching-title">Teaching & mentoring</h2>
-            <span>share.log</span>
-          </div>
+            <span slot="trailing">share.log</span>
+          </WindowBar>
           <div class="window-content">
             <ExperienceTimeline experiences={teachingExperiences} />
           </div>
@@ -85,7 +82,7 @@ const teachingExperiences = workExperiences.filter(
           <h2 id="projects-title">On my workbench</h2>
         </div>
       </div>
-      {projects.map((project) =>
+      {sideProjects.map((project) =>
         project.id === "pixrelay" ? (
           <ProjectCard project={project}>
             <PixRelayVisual slot="visual" />
@@ -103,11 +100,11 @@ const teachingExperiences = workExperiences.filter(
         </div>
       </div>
       <div class="hero-actions">
-        {contacts.map((contact) => (
+        {contactLinks.map((contact) => (
           <a
             class="button"
             href={contact.href}
-            target={contact.href.startsWith("mailto:") ? undefined : "_blank"}
+            target={contact.kind === "social" ? "_blank" : undefined}
             rel="noreferrer"
           >
             {contact.label}

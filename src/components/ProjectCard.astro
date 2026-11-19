@@ -1,5 +1,6 @@
 ---
 import type { Project } from "../data/profile";
+import WindowBar from "./WindowBar.astro";
 interface Props {
   project: Project;
 }
@@ -8,14 +9,9 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
 ---
 
 <article class="window">
-  <div class="window-bar">
+  <WindowBar>
     <span>▧ &nbsp; {project.windowTitle}</span>
-    <span class="window-controls" aria-hidden="true">
-      <span>−</span>
-      <span>□</span>
-      <span>×</span>
-    </span>
-  </div>
+  </WindowBar>
   <div
     class:list={["project-body", { "project-body--with-visual": hasVisual }]}
   >

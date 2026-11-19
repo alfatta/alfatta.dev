@@ -1,0 +1,92 @@
+<button
+  class="theme-toggle"
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle dark mode"
+  aria-pressed="false"
+  title="Toggle dark mode"
+>
+  <svg
+    class="light-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path d="M16 3H9V6H6V9H3V16H6V19H9V21H16V18H19V15H13V12H10V6H16Z" />
+  </svg>
+  <svg
+    class="dark-icon"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
+    <path d="M8 8H16V16H8ZM12 1V5M12 19V23M1 12H5M19 12H23M3 3L6 6M18 18L21 21M3 21L6 18M18 6L21 3" />
+  </svg>
+</button>
+
+<script>
+  const toggle = document.getElementById("theme-toggle");
+  const preference = window.matchMedia("(prefers-color-scheme: dark)");
+  const sync = () => {
+    const dark = document.documentElement.dataset.theme === "dark";
+    toggle?.setAttribute("aria-pressed", String(dark));
+    toggle?.setAttribute(
+      "aria-label",
+      dark ? "Switch to light mode" : "Switch to dark mode",
+    );
+    toggle?.setAttribute(
+      "title",
+      dark ? "Switch to light mode" : "Switch to dark mode",
+    );
+  };
+  toggle?.addEventListener("click", () => {
+    const theme =
+      document.documentElement.dataset.theme === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {}
+    sync();
+  });
+  preference.addEventListener("change", (event) => {
+    try {
+      if (localStorage.getItem("theme")) return;
+    } catch {}
+    document.documentElement.dataset.theme = event.matches ? "dark" : "light";
+    sync();
+  });
+  sync();
+</script>
+
+<style>
+  .theme-toggle {
+    background: var(--surface);
+    border: 1px solid var(--ink);
+    width: 37px;
+    height: 35px;
+    display: grid;
+    place-items: center;
+    box-shadow: 2px 2px 0 var(--shadow);
+  }
+  .theme-toggle svg {
+    width: 19px;
+    height: 19px;
+  }
+  .dark-icon,
+  :global([data-theme="dark"]) .light-icon {
+    display: none;
+  }
+  :global([data-theme="dark"]) .dark-icon {
+    display: block;
+  }
+  @media (max-width: 600px) {
+    .theme-toggle {
+      width: 31px;
+      height: 31px;
+    }
+  }
+</style>
