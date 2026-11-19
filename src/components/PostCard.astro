@@ -21,8 +21,9 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
 <a
   class:list={["post-card", { "post-card--detailed": variant === "detailed" }]}
   href={`/blog/${post.id}/`}
+  data-reveal
 >
-  <div class="post-art">
+  <div class="post-art" data-depth>
     <PixelIcon name={icons[index % icons.length]} />
     <span class="post-art-label">
       NOTE_{String(index + 1).padStart(2, "0")}.MD
@@ -49,7 +50,7 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
       transform 0.15s,
       box-shadow 0.15s;
   }
-  .post-card:hover {
+  .post-card:is(:hover, :focus-visible) {
     transform: translateY(-4px);
     box-shadow: 4px 5px 0 var(--shadow);
   }
@@ -68,6 +69,12 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
   .post-art :global(svg) {
     width: 68px;
     height: 68px;
+  }
+  .read-post > span {
+    transition: transform 0.18s ease-out;
+  }
+  .post-card:is(:hover, :focus-visible) .read-post > span {
+    transform: translate(2px, -2px);
   }
   .post-art-label {
     position: absolute;

@@ -14,7 +14,7 @@ const posts = (await getCollection("blog")).sort(
   description="Notes on frontend development, Vue, personal tooling, and things learned along the way."
 >
   <main id="main" class="site-width page-main">
-    <header class="page-heading">
+    <header class="page-heading" data-reveal>
       <span class="label">Notes from the keyboard</span>
       <h1>Bits & thoughts.</h1>
       <p>
@@ -22,7 +22,7 @@ const posts = (await getCollection("blog")).sort(
         little collection of notes from a life in code.
       </p>
     </header>
-    <div class="section-title">
+    <div class="section-title" data-reveal>
       <span class="eyebrow">
         {String(posts.length).padStart(2, "0")} ENTRIES / NEWEST FIRST
       </span>

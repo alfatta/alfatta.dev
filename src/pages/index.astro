@@ -31,7 +31,7 @@ const recentCompanies = getRecentCompanies(engineeringExperiences);
     <AboutPreview />
     <ExperiencePreview experiences={recentCompanies} />
     <section class="section" id="work" aria-labelledby="work-title">
-      <div class="section-title">
+      <div class="section-title" data-reveal>
         <div>
           <span class="label">From the day job</span>
           <h2 id="work-title">Featured work</h2>
@@ -43,7 +43,7 @@ const recentCompanies = getRecentCompanies(engineeringExperiences);
       <ProjectCard project={featuredProject} />
     </section>
     <section class="section" aria-labelledby="notes-title">
-      <div class="section-title">
+      <div class="section-title" data-reveal>
         <div>
           <span class="label">Notes from the keyboard</span>
           <h2 id="notes-title">Bits & thoughts</h2>

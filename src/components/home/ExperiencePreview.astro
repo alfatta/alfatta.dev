@@ -11,7 +11,7 @@ const { experiences } = Astro.props;
 ---
 
 <section class="section" aria-labelledby="experience-preview-title">
-  <div class="section-title">
+  <div class="section-title" data-reveal>
     <div>
       <span class="label">Experience / a quick look</span>
       <h2 id="experience-preview-title">Where I've been</h2>
@@ -20,7 +20,7 @@ const { experiences } = Astro.props;
       Full experience <span aria-hidden="true">→</span>
     </a>
   </div>
-  <div class="window">
+  <div class="window" data-reveal>
     <WindowBar>
       <span>▤ &nbsp; career.log</span>
       <span slot="trailing">RECENT COMPANIES</span>

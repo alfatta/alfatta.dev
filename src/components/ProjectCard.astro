@@ -8,7 +8,7 @@ const { project } = Astro.props;
 const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
 ---
 
-<article class="window">
+<article class="window" data-reveal>
   <WindowBar>
     <span>▧ &nbsp; {project.windowTitle}</span>
   </WindowBar>
@@ -21,19 +21,22 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
           "project-visual",
           { "project-visual-image": project.image },
         ]}
+        data-depth
       >
-        {project.image ? (
-          <img
-            src={project.image.src}
-            alt={project.image.alt}
-            width={project.image.width}
-            height={project.image.height}
-            loading="lazy"
-            decoding="async"
-          />
-        ) : (
-          <slot name="visual" />
-        )}
+        <div class="project-art-track" data-scroll-art>
+          {project.image ? (
+            <img
+              src={project.image.src}
+              alt={project.image.alt}
+              width={project.image.width}
+              height={project.image.height}
+              loading="lazy"
+              decoding="async"
+            />
+          ) : (
+            <slot name="visual" />
+          )}
+        </div>
       </div>
     )}
     <div class="project-copy">
@@ -78,7 +81,11 @@ const hasVisual = Boolean(project.image) || Astro.slots.has("visual");
     align-items: center;
     justify-content: center;
     padding: 25px;
+    overflow: clip;
     border-right: 1px solid var(--line);
+  }
+  .project-art-track {
+    width: 100%;
   }
   .project-visual-image {
     padding: 15px;

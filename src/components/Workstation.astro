@@ -15,6 +15,7 @@
         <path d="M0 1H4" stroke="var(--ink)" stroke-width="2" />
       </pattern>
     </defs>
+    <g data-assemble="wiring">
     <path d="M55 75H415V340H55z" fill="url(#dots)" />
     <g stroke="var(--line)" stroke-width="2">
       <path d="M24 107H77V69H112M366 80H420V121H448M391 277H437V244M39 229H66V266H92" />
@@ -23,6 +24,9 @@
     <g fill="var(--blue)" stroke="var(--ink)" stroke-width="2">
       <path d="M20 95H36V111H20zM438 119H452V133H438zM430 233H444V247H430z" />
     </g>
+    </g>
+    <g data-assemble="note">
+    <g data-parallax="12">
     <path
       d="M135 35H305V77H226L216 87V77H135z"
       fill="var(--surface)"
@@ -39,10 +43,14 @@
       ONE PIXEL AT A TIME.
     </text>
     <path
+      class="boot-meter"
       d="M151 63H161M166 63H176M181 63H191M196 63H206M211 63H221M226 63H236M241 63H251M256 63H289"
       stroke="var(--accent)"
       stroke-width="5"
     />
+    </g>
+    </g>
+    <g data-assemble="monitor">
     <path
       d="M106 110H331V120H342V267H331V278H106V267H95V121H106z"
       fill="var(--ink)"
@@ -63,6 +71,7 @@
       stroke="var(--ink)"
       stroke-width="3"
     />
+    <g class="terminal-screen">
     <path d="M122 138H306V239H122z" fill="#193756" />
     <path d="M123 139H305V153H123z" fill="#8fb4d3" />
     <path
@@ -73,12 +82,14 @@
     <text x="160" y="149" fill="#193756" font-family="monospace" font-size="7">
       hello-world.ts
     </text>
-    <path
-      d="M139 168H164M173 168H207M149 182H178M187 182H263M149 196H170M179 196H231M139 210H150"
-      stroke="#a4c9e8"
-      stroke-width="4"
-    />
-    <path d="M151 224H161" stroke="#f8f6ef" stroke-width="5" />
+    <g class="terminal-code" stroke="#a4c9e8" stroke-width="4">
+      <path d="M139 168H164M173 168H207" />
+      <path d="M149 182H178M187 182H263" />
+      <path d="M149 196H170M179 196H231" />
+      <path d="M139 210H150" />
+    </g>
+    <path class="terminal-cursor" d="M151 224H161" stroke="#f8f6ef" stroke-width="5" />
+    </g>
     <path d="M320 144H328V180H320z" fill="url(#vents)" />
     <path d="M320 225H326V231H320z" fill="var(--surface)" />
     <path d="M200 255H230V261H200z" fill="var(--accent)" />
@@ -88,6 +99,8 @@
       stroke="var(--ink)"
       stroke-width="2"
     />
+    </g>
+    <g data-assemble="base">
     <path
       d="M84 302H353V345H84z"
       fill="var(--blue-deep)"
@@ -105,6 +118,8 @@
     <path d="M244 323H316" stroke="var(--ink)" stroke-width="3" />
     <path d="M207 320H214V327H207z" fill="var(--accent)" />
     <path d="M84 349H353V355H84z" fill="var(--shadow)" />
+    </g>
+    <g data-assemble="keyboard">
     <path
       d="M108 355H309L333 383H83z"
       fill="var(--blue-deep)"
@@ -121,6 +136,8 @@
       )),
     )}
     <path d="M138 379H262" stroke="var(--ink)" stroke-width="3" />
+    </g>
+    <g data-assemble="coffee">
     <path
       d="M369 303H402V342H369zM402 310H413V332H402"
       fill="var(--blue)"
@@ -136,10 +153,14 @@
       font-family="monospace"
     >{`</>`}</text>
     <path
+      class="coffee-steam"
       d="M379 293V285H384V276M391 294V279H396V269"
       stroke="var(--line)"
       stroke-width="2"
     />
+    </g>
+    <g data-assemble="disk">
+    <g data-parallax="18">
     <path
       d="M364 182H406L414 190V233H364z"
       fill="var(--blue-deep)"
@@ -153,6 +174,10 @@
       stroke-width="2"
     />
     <path d="M390 186H395V198H390z" fill="var(--ink)" />
+    </g>
+    </g>
+    <g data-assemble="chip">
+    <g data-parallax="-10">
     <path
       d="M35 158H68V190H35z"
       fill="var(--blue)"
@@ -163,7 +188,10 @@
     <g stroke="var(--ink)" stroke-width="2">
       <path d="M41 151V158M49 151V158M57 151V158M41 190V197M49 190V197M57 190V197M28 165H35M28 174H35M28 183H35M68 165H75M68 174H75M68 183H75" />
     </g>
+    </g>
+    </g>
     <path d="M28 387H447" stroke="var(--line)" stroke-width="2" />
+    <g data-assemble="mouse">
     <path
       d="M350 367H368V373H376V383H344V373H350z"
       fill="var(--blue)"
@@ -171,6 +199,7 @@
       stroke-width="2"
     />
     <path d="M360 367V377" stroke="var(--ink)" stroke-width="2" />
+    </g>
   </svg>
   <div class="desktop-label">
     <span>MY LITTLE CORNER OF THE INTERNET</span>
