@@ -74,36 +74,27 @@ export const sideProjects: Project[] = [
   },
 ];
 
-interface ContactDetails {
+interface SocialContact {
   id: string;
   label: string;
   handle: string;
   description: string;
-}
-
-interface SocialContact extends ContactDetails {
-  kind: "social";
   href: `https://${string}`;
 }
 
-interface EmailContact extends ContactDetails {
-  kind: "email";
+interface EmailContact {
   href: `mailto:${string}`;
+  handle: string;
 }
 
 export const emailContact: EmailContact = {
-  id: "email",
-  kind: "email",
-  label: "Mail",
   href: "mailto:hello@alfatta.dev",
   handle: "hello@alfatta.dev",
-  description: "For ideas, questions, and a simple hello.",
 };
 
 export const socialLinks: SocialContact[] = [
   {
     id: "linkedin",
-    kind: "social",
     label: "LinkedIn",
     href: "https://linkedin.com/in/alfattarezqa",
     handle: "alfattarezqa",
@@ -111,7 +102,6 @@ export const socialLinks: SocialContact[] = [
   },
   {
     id: "github",
-    kind: "social",
     label: "GitHub",
     href: "https://github.com/alfatta",
     handle: "alfatta",
@@ -119,7 +109,6 @@ export const socialLinks: SocialContact[] = [
   },
   {
     id: "instagram",
-    kind: "social",
     label: "Instagram",
     href: "https://instagram.com/alfattarezqa",
     handle: "alfattarezqa",
@@ -127,15 +116,9 @@ export const socialLinks: SocialContact[] = [
   },
   {
     id: "x",
-    kind: "social",
     label: "X",
     href: "https://x.com/alfattarezqa",
     handle: "alfattarezqa",
     description: "Thoughts, updates, and conversations.",
   },
-];
-
-export const contactLinks: (SocialContact | EmailContact)[] = [
-  ...socialLinks,
-  emailContact,
 ];

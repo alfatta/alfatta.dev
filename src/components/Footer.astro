@@ -1,5 +1,5 @@
 ---
-import { contactLinks } from "../data/profile";
+import { socialLinks } from "../data/profile";
 ---
 
 <footer class="site-width site-footer" data-track-location="footer">
@@ -9,15 +9,15 @@ import { contactLinks } from "../data/profile";
   </p>
   <div class="footer-links">
     <a href="/contact/" data-track-event="navigation_click" data-track-id="contact">Contact</a>
-    {contactLinks
-      .filter((contact) => ["linkedin", "x", "email"].includes(contact.id))
+    {socialLinks
+      .filter((contact) => contact.id === "linkedin" || contact.id === "x")
       .map((contact) => (
         <a
           href={contact.href}
-          data-track-event={contact.kind === "email" ? "email_click" : "social_click"}
+          data-track-event="social_click"
           data-track-id={contact.id}
-          data-track-platform={contact.kind === "social" ? contact.id : undefined}
-          target={contact.kind === "social" ? "_blank" : undefined}
+          data-track-platform={contact.id}
+          target="_blank"
           rel="noreferrer"
         >
           {contact.label} ↗

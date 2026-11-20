@@ -34,6 +34,7 @@ Built with Astro and Tailwind CSS, with Markdown and MDX for writing.
 - `src/components/` contains the reusable UI, including the shared window bar and theme toggle. Theme initialization stays in the document head so the saved preference is applied before the page appears.
 - `src/content/blog/` contains the writing; shared colors, typography, and layout styles live in `src/styles/global.css`.
 - `src/components/BaseHead.astro` loads the deferred Umami Cloud tracker and the asynchronous Ahrefs Analytics script on every page.
+- Direct email links live on `/contact/`; the shared footer links to that page so Cloudflare's email obfuscation URL is not repeated across the site.
 
 ## Analytics
 
@@ -48,9 +49,9 @@ Umami keeps its automatic pageviews. `src/scripts/analytics.ts` additionally sen
 | `cta_click` | Hero, About/Experience previews, experience rows, All posts, Contact banners, Contact signoff |
 | `project_link_click` | Project destinations, including Ajaib Terminal and PixRelay |
 | `experience_link_click` | Work/teaching links and LinkedIn experience |
-| `post_click` | Article cards on Home and Blog |
+| `post_click` | Article cards on Home and Blog, Manjaro guide link in the About toolkit |
 | `article_link_click` | Article body links, author, and back-to-blog |
-| `email_click` | Email address and email CTAs |
+| `email_click` | Email address and email CTA on Contact |
 | `social_click` | Social profiles on About, Contact, and the footer |
 | `rss_click` | Blog and footer RSS links |
 
