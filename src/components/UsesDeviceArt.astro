@@ -1,0 +1,66 @@
+---
+interface Props {
+  device: "laptop" | "phone" | "earbuds" | "camera";
+}
+const { device } = Astro.props;
+---
+
+<svg viewBox="0 0 256 156" fill="none" aria-hidden="true" shape-rendering="crispEdges">
+  {device === "laptop" && (
+    <>
+      <path d="M29 138h198v6H29z" fill="var(--line)" opacity=".55" />
+      <path d="M50 20h156v6h6v91H44V26h6z" fill="var(--paper)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M54 30h148v77H54z" fill="var(--ink)" />
+      <path d="M59 35h138v67H59z" fill="var(--surface)" />
+      <path d="M59 35h138v12H59z" fill="var(--blue-deep)" />
+      <path d="M65 39h3v3h-3zm6 0h3v3h-3zm6 0h3v3h-3z" fill="var(--ink)" />
+      <path d="M59 47h19v55H59z" fill="var(--blue)" />
+      <path d="M65 55h7m-7 8h7m-7 8h5m-5 8h7" stroke="var(--muted)" stroke-width="2" />
+      <path d="M85 54h31m-24 8h15m-15 8h27m-34 8h16m-9 8h24" stroke="var(--accent)" stroke-width="3" />
+      <path d="M111 62h16m-8 24h10m18-27h39m-39 8h27m-27 8h32m-32 8h15" stroke="var(--line)" stroke-width="3" />
+      <path d="M137 47v55" stroke="var(--line)" />
+      <path d="M44 117h168l19 14v5H25v-5z" fill="var(--blue-deep)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M77 120h102l7 5H70zm41 8h20v3h-20z" fill="var(--muted)" />
+      <path d="M24 54h8m-4-4v8m194 22h12m-6-6v12" stroke="var(--accent)" stroke-width="2" />
+    </>
+  )}
+  {device === "phone" && (
+    <>
+      <path d="M65 141h126v6H65z" fill="var(--line)" opacity=".55" />
+      <path d="M76 25h55v6h6v98h-6v8H76v-8h-6V31h6z" fill="var(--blue-deep)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M81 40h8v18h-8zm0 25h8v8h-8z" fill="var(--ink)" />
+      <path d="M84 44h2v2h-2zm0 8h2v2h-2zm0 16h2v2h-2z" fill="var(--paper)" />
+      <path d="M116 15h57v6h6v108h-6v8h-57v-8h-6V21h6z" fill="var(--paper)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M118 26h53v98h-53z" fill="var(--blue)" />
+      <path d="M118 98l16-18h9l12-14h16v58h-53z" fill="var(--blue-deep)" />
+      <path d="M118 110h53v14h-53zm24-79h5v5h-5z" fill="var(--ink)" />
+      <path d="M126 116h5v4h-5zm9 0h5v4h-5zm9 0h5v4h-5zm9 0h5v4h-5z" fill="var(--paper)" />
+      <path d="M193 41h10m-5-5v10m-146 54h10m-5-5v10" stroke="var(--accent)" stroke-width="2" />
+    </>
+  )}
+  {device === "earbuds" && (
+    <>
+      <path d="M69 139h118v6H69z" fill="var(--line)" opacity=".55" />
+      <path d="M85 77h86v6h8v11H77V83h8z" fill="var(--blue-deep)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M72 94h112v25h-6v10h-8v5H86v-5h-8v-10h-6z" fill="var(--paper)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M78 103h100m-68 11h36" stroke="var(--line)" stroke-width="2" />
+      <path d="M125 115h6v4h-6z" fill="var(--accent)" />
+      <path d="M91 20h21v6h7v14h-7v22h-12V43h-9v-5h-6V26h6zm54 8h21v6h6v12h-6v5h-9v19h-12V48h-7V34h7z" fill="var(--blue)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M93 28h13v7H93zm57 8h13v7h-13z" fill="var(--muted)" />
+      <path d="M60 66h10m-5-5v10m137 14h12m-6-6v12" stroke="var(--accent)" stroke-width="2" />
+    </>
+  )}
+  {device === "camera" && (
+    <>
+      <path d="M49 128h158v6H49z" fill="var(--line)" opacity=".55" />
+      <path d="M55 50h10V38h30v12h105v69H55z" fill="var(--paper)" stroke="var(--ink)" stroke-width="3" />
+      <path d="M57 68h141v49H57z" fill="var(--blue-deep)" />
+      <path d="M70 56h19v7H70zm101 0h16v7h-16z" fill="var(--muted)" />
+      <path d="M112 56h34v7h11v12h7v29h-7v11h-11v7h-34v-7h-12v-11h-6V75h6V63h12z" fill="var(--ink)" />
+      <path d="M116 68h26v6h10v31h-10v6h-26v-6h-10V74h10z" fill="var(--blue)" />
+      <path d="M118 79h22v21h-22z" fill="var(--accent)" />
+      <path d="M120 81h8v5h-8z" fill="var(--paper)" />
+      <path d="M30 69h10m-5-5v10m180 14h12m-6-6v12" stroke="var(--accent)" stroke-width="2" />
+    </>
+  )}
+</svg>

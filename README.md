@@ -11,6 +11,7 @@ I'm **Alfatta Rezqa**, a software developer with a frontend focus and a full-sta
 - **[Home](https://alfatta.dev/)** — an introduction, current work, experience highlights, featured professional work, and recent writing.
 - **[About](https://alfatta.dev/about/)** — my engineering background, teaching and mentoring experience, toolkit, and side projects.
 - **[Blog](https://alfatta.dev/blog/)** — notes on frontend development, Vue, personal tooling, and lessons from building software. Also available via [RSS](https://alfatta.dev/rss.xml).
+- **[Uses](https://alfatta.dev/uses/)** — an illustrated inventory of my daily-driver gear, development tools, and favorite coding font.
 - **[Contact](https://alfatta.dev/contact/)** — ways to reach me and connect elsewhere online.
 
 The portfolio includes my contributions to **Ajaib Terminal**, a desktop stock trading application built with the Ajaib team, and **PixRelay**, an image processing service.
