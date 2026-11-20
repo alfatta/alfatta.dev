@@ -5,19 +5,19 @@ import UsesDeviceArt from "../components/UsesDeviceArt.astro";
 import { SITE_TITLE } from "../consts";
 
 const gear = [
-  { device: "laptop", role: "Laptop", name: "MacBook Air M5", href: "https://s.shopee.co.id/4fxvlL8soT", specs: ["16 GB unified memory", "512 GB SSD", "10-core CPU", "8-core GPU", "Liquid Retina · 2560 × 1664"] },
-  { device: "phone", role: "Phone", name: "Samsung Galaxy S25 FE", href: "https://s.shopee.co.id/6L69kQkXmj", specs: ["8 GB RAM", "256 GB storage", "One UI 9 · Android 17"] },
-  { device: "earbuds", role: "Earbuds", name: "Soundcore R50i", href: "https://s.shopee.co.id/6fj097mLI6", specs: ["10 mm drivers", "Bluetooth 5.3", "IPX5", "Up to 30 h with case"] },
-  { device: "camera", role: "Camera", name: "Fujifilm X-A7", href: "https://s.shopee.co.id/7VI78cbJeD", specs: ["24.2 MP APS-C", "X mount", "4K / 30 fps", "3.5-inch flip screen"] },
+  { id: "macbook-air-m5", device: "laptop", role: "Laptop", name: "MacBook Air M5", href: "https://s.shopee.co.id/4fxvlL8soT", specs: ["16 GB unified memory", "512 GB SSD", "10-core CPU", "8-core GPU", "Liquid Retina · 2560 × 1664"] },
+  { id: "galaxy-s25-fe", device: "phone", role: "Phone", name: "Samsung Galaxy S25 FE", href: "https://s.shopee.co.id/6L69kQkXmj", specs: ["8 GB RAM", "256 GB storage", "One UI 9 · Android 17"] },
+  { id: "soundcore-r50i", device: "earbuds", role: "Earbuds", name: "Soundcore R50i", href: "https://s.shopee.co.id/6fj097mLI6", specs: ["10 mm drivers", "Bluetooth 5.3", "IPX5", "Up to 30 h with case"] },
+  { id: "fujifilm-x-a7", device: "camera", role: "Camera", name: "Fujifilm X-A7", href: "https://s.shopee.co.id/7VI78cbJeD", specs: ["24.2 MP APS-C", "X mount", "4K / 30 fps", "3.5-inch flip screen"] },
 ] as const;
 
 const tools = [
-  { icon: "code", role: "Editor", links: [["Zed", "https://zed.dev/"]] },
-  { icon: "monitor", role: "Terminal", links: [["Ghostty", "https://ghostty.org/"]] },
-  { icon: "chip", role: "Coding harness", links: [["omp", "https://omp.sh/"]] },
+  { icon: "code", role: "Editor", links: [{ id: "zed", name: "Zed", href: "https://zed.dev/" }] },
+  { icon: "monitor", role: "Terminal", links: [{ id: "ghostty", name: "Ghostty", href: "https://ghostty.org/" }] },
+  { icon: "chip", role: "Coding harness", links: [{ id: "omp", name: "omp", href: "https://omp.sh/" }] },
   { icon: "robot", role: "AI assistants", links: [
-    ["Codex", "https://openai.com/codex/"],
-    ["Claude", "https://www.anthropic.com/claude-code"],
+    { id: "codex", name: "Codex", href: "https://openai.com/codex/" },
+    { id: "claude", name: "Claude", href: "https://www.anthropic.com/claude-code" },
   ] },
 ] as const;
 ---
@@ -33,7 +33,7 @@ const tools = [
       <p>The gear I carry and the tools I reach for when I'm writing code.</p>
     </header>
 
-    <section aria-labelledby="gear-title">
+    <section aria-labelledby="gear-title" data-track-location="uses-hardware">
       <div class="section-title" data-reveal>
         <div>
           <span class="eyebrow">01 / Hardware</span>
@@ -41,14 +41,18 @@ const tools = [
         </div>
       </div>
       <ul class="gear-grid">
-        {gear.map(({ device, role, name, href, specs }) => (
+        {gear.map(({ id, device, role, name, href, specs }) => (
           <li class:list={["window", "device", `device--${device}`]} data-reveal>
             <div class="device-art">
               <UsesDeviceArt device={device} />
             </div>
             <div class="device-copy">
               <span class="eyebrow">{role}</span>
-              <h3><a class="software-link" href={href} rel="sponsored">{name}<span aria-hidden="true"> ↗</span></a></h3>
+              <h3>
+                <a class="software-link" href={href} rel="sponsored" data-track-event="affiliate_link_click" data-track-id={id}>
+                  {name}<span aria-hidden="true"> ↗</span>
+                </a>
+              </h3>
               {specs.length > 0 && (
                 <ul class="device-specs" aria-label={`${name} specifications`}>
                   {specs.map((spec) => <li>{spec}</li>)}
@@ -61,7 +65,7 @@ const tools = [
       <p><small>The Shopee links above are affiliate links. I may earn a commission if you buy through them.</small></p>
     </section>
 
-    <section class="section" aria-labelledby="tools-title">
+    <section class="section" aria-labelledby="tools-title" data-track-location="uses-software">
       <div class="section-title" data-reveal>
         <div>
           <span class="eyebrow">02 / Software</span>
@@ -75,8 +79,8 @@ const tools = [
               <span class="tool-icon"><PixelIcon name={icon} /></span>
               <span class="eyebrow">{role}</span>
               <h3>
-                {links.map(([name, href], index) => (
-                  <>{index > 0 && " + "}<a class="software-link" href={href}>{name}<span aria-hidden="true"> ↗</span></a></>
+                {links.map(({ id, name, href }, index) => (
+                  <>{index > 0 && " + "}<a class="software-link" href={href} data-track-event="software_link_click" data-track-id={id}>{name}<span aria-hidden="true"> ↗</span></a></>
                 ))}
               </h3>
             </li>
@@ -86,7 +90,11 @@ const tools = [
           <div class="font-specimen" aria-hidden="true">Aa <span>{'{ }'}</span> 01</div>
           <div class="device-copy">
             <span class="eyebrow">Favorite font</span>
-            <h3><a class="software-link" href="https://github.com/subframe7536/Maple-font">Maple Mono<span aria-hidden="true"> ↗</span></a></h3>
+            <h3>
+              <a class="software-link" href="https://github.com/subframe7536/Maple-font" data-track-event="software_link_click" data-track-id="maple-mono">
+                Maple Mono<span aria-hidden="true"> ↗</span>
+              </a>
+            </h3>
           </div>
         </div>
       </div>
