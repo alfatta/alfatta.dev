@@ -9,14 +9,16 @@ import WindowBar from "../components/WindowBar.astro";
 import { SITE_TITLE } from "../consts";
 import {
   ABOUT,
-  contactLinks,
   sideProjects,
+  socialLinks,
   techStacks,
 } from "../data/profile";
 import {
   engineeringExperiences,
   teachingExperiences,
 } from "../data/experience";
+
+const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
 ---
 
 <SiteLayout
@@ -65,6 +67,16 @@ import {
                 <span>{tech}</span>
               ))}
             </div>
+            <a
+              class="text-link toolkit-note"
+              href={`/blog/${manjaroPostSlug}/`}
+              data-track-event="post_click"
+              data-track-location="about-toolkit"
+              data-track-id={`post-${manjaroPostSlug}`}
+              data-track-post-slug={manjaroPostSlug}
+            >
+              My Manjaro Xfce setup for development <span aria-hidden="true">→</span>
+            </a>
           </div>
         </section>
         <section class="window" aria-labelledby="teaching-title" data-reveal>
@@ -103,15 +115,15 @@ import {
         </div>
       </div>
       <div class="hero-actions" data-track-location="about-social">
-        {contactLinks.map((contact) => (
+        {socialLinks.map((contact) => (
           <a
             class="button"
             href={contact.href}
-            target={contact.kind === "social" ? "_blank" : undefined}
+            target="_blank"
             rel="noreferrer"
-            data-track-event={contact.kind === "email" ? "email_click" : "social_click"}
+            data-track-event="social_click"
             data-track-id={contact.id}
-            data-track-platform={contact.kind === "social" ? contact.id : undefined}
+            data-track-platform={contact.id}
           >
             {contact.label}
             <span aria-hidden="true">↗</span>
@@ -148,6 +160,9 @@ import {
     border: 1px solid var(--line);
     background: var(--blue);
     font-size: 11px;
+  }
+  .toolkit-note {
+    margin-top: 16px;
   }
   .about-stack-art {
     width: 95px;
