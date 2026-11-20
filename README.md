@@ -55,6 +55,8 @@ Umami keeps its automatic pageviews. `src/scripts/analytics.ts` additionally sen
 | `email_click` | Email address and email CTA on Contact |
 | `social_click` | Social profiles on About, Contact, and the footer |
 | `rss_click` | Blog and footer RSS links |
+| `affiliate_link_click` | Shopee gear links in Uses (`uses-hardware`) |
+| `software_link_click` | Development tool and font links in Uses (`uses-software`) |
 
 Every custom event includes `page_path` and `page_type`; article pages also include `post_slug`. Click events add `location`, `element_id`, and, for links, `destination`. Relevant events also include `project_id`, `platform`, `theme`, or the clicked article's `post_slug`. Destinations omit query values; non-HTTP destinations record only their protocol, such as `mailto:`.
 
