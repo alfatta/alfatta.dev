@@ -1,2 +1,2 @@
 export type IconName =
-  "monitor" | "folder" | "code" | "disk" | "mail" | "image" | "chip";
+  "monitor" | "folder" | "code" | "disk" | "mail" | "image" | "chip" | "robot";
