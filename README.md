@@ -33,9 +33,11 @@ Built with Astro and Tailwind CSS, with Markdown and MDX for writing.
 - `src/data/profile.ts` holds profile details, typed contact links, and portfolio projects. `src/data/experience.ts` holds career history and the selectors that preserve its curated order.
 - `src/components/` contains the reusable UI, including the shared window bar and theme toggle. Theme initialization stays in the document head so the saved preference is applied before the page appears.
 - `src/content/blog/` contains the writing; shared colors, typography, and layout styles live in `src/styles/global.css`.
-- `src/components/BaseHead.astro` loads the deferred Umami Cloud tracking script on every page.
+- `src/components/BaseHead.astro` loads the deferred Umami Cloud tracker and the asynchronous Ahrefs Analytics script on every page.
 
 ## Analytics
+
+The shared document head includes the Ahrefs Analytics bootstrap, which appends `https://analytics.ahrefs.com/analytics.js` asynchronously using the configured public site key. It runs alongside Umami without changing Umami's event tracking.
 
 Umami keeps its automatic pageviews. `src/scripts/analytics.ts` additionally sends `page_load` once after each document's `load` event, including individual blog articles.
 
