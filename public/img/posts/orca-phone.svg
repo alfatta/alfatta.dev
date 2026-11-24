@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="Menlo, Consolas, monospace" font-size="14" role="img" aria-label="Desktop Orca paired with a phone through a pairing code">
+<rect width="800" height="340" fill="#f8f6ef"/><rect x="1" y="1" width="798" height="338" fill="none" stroke="#193756" stroke-width="2"/>
+<rect x="1" y="1" width="798" height="26" fill="#b4cfe7" stroke="#193756" stroke-width="2"/><text x="14" y="19" fill="#193756" font-weight="bold">phone-pairing.exe</text>
+<rect x="40" y="80" width="260" height="150" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="44" y="84" width="260" height="150" fill="none"/><text x="170" y="160" text-anchor="middle" fill="#193756">Desktop Orca</text>
+<text x="170" y="205" text-anchor="middle" fill="#536b80">agents keep running</text>
+<rect x="330" y="120" width="140" height="60" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="334" y="124" width="140" height="60" fill="none"/><text x="400" y="155" text-anchor="middle" fill="#193756">pairing code</text>
+<path d="M300 150 h30 M470 150 h30" stroke="#315f8d" stroke-width="3"/>
+<rect x="530" y="60" width="110" height="200" rx="14" fill="#fffdf7" stroke="#193756" stroke-width="2"/>
+<text x="585" y="140" text-anchor="middle" fill="#193756">Phone</text>
+<text x="585" y="165" text-anchor="middle" fill="#536b80">check / nudge</text>
+<text x="585" y="185" text-anchor="middle" fill="#536b80">agents</text>
+<text x="400" y="300" text-anchor="middle" fill="#536b80">pair once, then follow long tasks from anywhere</text>
+</svg>
