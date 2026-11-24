@@ -2,16 +2,17 @@
 title: "Moving my coding agent workflow into Orca"
 description: "I used to juggle Zed, omp, Claude and Codex in separate windows. Here's why I now run all of them, plus my worktrees, MCP servers and Jira, from Orca."
 pubDate: "2026-11-24T10:00:00+07:00"
+heroImageUrl: https://alfatta.dev/img/posts/orca-og.png
 ---
 
-For a long time my setup was comfortable, and also scattered. This is how it looked, and why I moved everything into [Orca](https://github.com/stablyai/orca).
+For a long time my setup was comfortable, and also scattered. This is how it looked, and why I moved everything into [Orca](https://github.com/stablyai/orca), an app for running coding agents across git worktrees.
 
-![Before: Zed, omp, Claude and Codex as separate windows. After: all of them inside one Orca workspace](/img/posts/orca-before-after.svg)
+<img src="/img/posts/orca-before-after.svg" alt="Before: Zed, omp, Claude and Codex as separate windows. After: all of them inside one Orca workspace" width="800" height="340" loading="eager" decoding="async" />
 
 ## The old setup
 
-- **Zed** as the main editor.
-- **omp**, my coding agent of choice, opened through Zed's terminal integration.
+- **[Zed](https://zed.dev/)** as the main editor.
+- **[omp](https://omp.sh/)**, my coding agent of choice, opened through Zed's terminal integration.
 - **Claude** and **Codex** running separately, each in its own place.
 
 The main reason I used Zed at all was **worktree management**. Git worktrees let me keep several branches checked out side by side, and Zed made that painless. The terminal integration was just the way to get my agent next to the code.
@@ -36,7 +37,7 @@ Orca also gives agents a way to talk to each other. From the CLI, one agent can 
 
 This is the feature that originally kept me on Zed, and now it's built into the tool I run my agents in. Orca picks up my git worktrees on its own. Each worktree becomes a workspace with its own terminals and agents, so I never lose track of which agent is working on which branch.
 
-![A repo with three worktrees, each with its own agents running inside](/img/posts/orca-worktrees.svg)
+<img src="/img/posts/orca-worktrees.svg" alt="A repo with three worktrees, each with its own agents running inside" width="800" height="340" loading="lazy" decoding="async" />
 
 Creating a new one for a task is a single command, and it can be a child of the workspace I'm currently in:
 
@@ -54,13 +55,13 @@ orca reference add ENG-123 --worktree current
 
 The same mechanism accepts GitHub pull request URLs and Linear issues, so one worktree can carry its ticket and its PR together. Later I can search by a ticket key and jump straight to the worktree and agent that worked on it, instead of digging through branches.
 
-![A Jira ticket linked to a worktree, an omp session and a pull request](/img/posts/orca-jira-flow.svg)
+<img src="/img/posts/orca-jira-flow.svg" alt="A Jira ticket linked to a worktree, an omp session and a pull request" width="800" height="340" loading="lazy" decoding="async" />
 
 ### Reaching it from my phone
 
 Connecting Orca to my phone was easy. Orca can pair with other devices through a pairing code, so I pair once and then I can check on a running agent or nudge it along without sitting at my desk. For long agent tasks, that matters more than I expected: I can start something, walk away, and still see how it's going.
 
-![Desktop Orca paired with a phone through a pairing code](/img/posts/orca-phone.svg)
+<img src="/img/posts/orca-phone.svg" alt="Desktop Orca paired with a phone through a pairing code" width="800" height="340" loading="lazy" decoding="async" />
 
 ## So, is Zed gone?
 
@@ -78,4 +79,4 @@ Not entirely. Zed is still a great editor, and I'll open it when I want to read 
 
 ## Wrapping up
 
-The short version: the same tools I already liked (omp, Claude, Codex, worktrees, my MCP servers, Jira) now live in one place instead of five. If your workflow looks like my old one, Orca is worth a try.
+The short version: the same tools I already liked (omp, Claude, Codex, worktrees, my MCP servers, Jira) now live in one place instead of five. If your workflow looks like my old one, Orca is worth a try. You can see the rest of my gear on the [Uses page](/uses/), or my [Linux dev setup](/blog/how-i-setup-my-pc-for-programming-use/) from before all of this.
