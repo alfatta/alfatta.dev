@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="Menlo, Consolas, monospace" font-size="14" role="img" aria-label="A repo with several worktrees, each running its own agents">
+<rect width="800" height="340" fill="#f8f6ef"/><rect x="1" y="1" width="798" height="338" fill="none" stroke="#193756" stroke-width="2"/>
+<rect x="1" y="1" width="798" height="26" fill="#b4cfe7" stroke="#193756" stroke-width="2"/><text x="14" y="19" fill="#193756" font-weight="bold">worktrees.exe</text>
+<rect x="300" y="45" width="200" height="44" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="304" y="49" width="200" height="44" fill="none"/><text x="400" y="72" text-anchor="middle" fill="#193756">repo: my-project</text>
+<path d="M400 93 v22 M150 115 H650 M150 115 v25 M400 115 v25 M650 115 v25" fill="none" stroke="#315f8d" stroke-width="2"/>
+<rect x="50" y="140" width="200" height="44" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="54" y="144" width="200" height="44" fill="none"/><text x="150" y="167" text-anchor="middle" fill="#193756">feat/login</text>
+<rect x="300" y="140" width="200" height="44" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="304" y="144" width="200" height="44" fill="none"/><text x="400" y="167" text-anchor="middle" fill="#193756">fix/api-timeout</text>
+<rect x="550" y="140" width="200" height="44" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="554" y="144" width="200" height="44" fill="none"/><text x="650" y="167" text-anchor="middle" fill="#193756">research/caching</text>
+<path d="M150 188 v22 M400 188 v22 M650 188 v22" stroke="#315f8d" stroke-width="2"/>
+<rect x="70" y="210" width="160" height="40" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="74" y="214" width="160" height="40" fill="none"/><text x="150" y="235" text-anchor="middle" fill="#193756">omp</text>
+<rect x="70" y="260" width="160" height="40" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="74" y="264" width="160" height="40" fill="none"/><text x="150" y="285" text-anchor="middle" fill="#193756">Codex (review)</text>
+<rect x="320" y="210" width="160" height="40" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="324" y="214" width="160" height="40" fill="none"/><text x="400" y="235" text-anchor="middle" fill="#193756">omp</text>
+<rect x="570" y="210" width="160" height="40" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="574" y="214" width="160" height="40" fill="none"/><text x="650" y="235" text-anchor="middle" fill="#193756">Claude (research)</text>
+<text x="400" y="326" text-anchor="middle" fill="#536b80">each worktree = its own terminals and agents</text>
+</svg>

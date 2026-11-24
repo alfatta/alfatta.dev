@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="Menlo, Consolas, monospace" font-size="14" role="img" aria-label="A Jira ticket linked to a worktree, an agent session and a pull request">
+<rect width="800" height="340" fill="#f8f6ef"/><rect x="1" y="1" width="798" height="338" fill="none" stroke="#193756" stroke-width="2"/>
+<rect x="1" y="1" width="798" height="26" fill="#b4cfe7" stroke="#193756" stroke-width="2"/><text x="14" y="19" fill="#193756" font-weight="bold">jira-link.exe</text>
+<rect x="30" y="120" width="150" height="60" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="34" y="124" width="150" height="60" fill="none"/><text x="105" y="155" text-anchor="middle" fill="#193756">Jira ticket</text>
+<rect x="230" y="120" width="150" height="60" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="234" y="124" width="150" height="60" fill="none"/><text x="305" y="155" text-anchor="middle" fill="#193756">Worktree</text>
+<rect x="430" y="120" width="150" height="60" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="434" y="124" width="150" height="60" fill="none"/><text x="505" y="155" text-anchor="middle" fill="#193756">omp session</text>
+<rect x="630" y="120" width="140" height="60" fill="#fffdf7" stroke="#193756" stroke-width="2"/><rect x="634" y="124" width="140" height="60" fill="none"/><text x="700" y="155" text-anchor="middle" fill="#193756">Pull request</text>
+<path d="M180 150 h50 M380 150 h50 M580 150 h50" stroke="#315f8d" stroke-width="3"/>
+<path d="M105 120 V80 H700 V120" fill="none" stroke="#315f8d" stroke-width="2" stroke-dasharray="6 4"/>
+<text x="400" y="72" text-anchor="middle" fill="#536b80">linked, so you can find any piece from any other</text>
+<text x="400" y="230" text-anchor="middle" fill="#193756">orca reference add ENG-123 --worktree current</text>
+<text x="400" y="260" text-anchor="middle" fill="#536b80">search by ticket key, jump to the worktree</text>
+</svg>
