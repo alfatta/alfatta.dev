@@ -7,8 +7,6 @@ pubDate: "2024-07-02T08:22:26+07:00"
 updatedDate: "2026-11-20"
 ---
 
-<img src="https://images.unsplash.com/photo-1640158615573-cd28feb1bf4e?fit=crop&amp;w=800&amp;h=418&amp;fm=avif" alt="Vue.js: Ref vs Reactive and Which One Should I Use?" width="800" height="418" loading="eager" decoding="async" />
-
 In Vue 3's Composition API, start with `ref` for most state. It works for both primitives and objects, and you can replace its value without losing reactivity. Use `reactive` when you want to keep one object and update its properties in place.
 
 ## Use `ref` for values you might replace
