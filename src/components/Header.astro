@@ -24,7 +24,7 @@ const pathname = Astro.url.pathname;
         ["/contact/", "Contact"],
       ].map(([href, label]) => (
         <a
-          class="nav-link"
+          class:list={["nav-link", { "nav-contact": label === "Contact" }]}
           href={href}
           data-track-event="navigation_click"
           data-track-id={`nav-${label.toLowerCase()}`}
@@ -107,6 +107,22 @@ const pathname = Astro.url.pathname;
   .nav-link[aria-current="page"]::after,
   .nav-link:is(:hover, :focus-visible)::after {
     transform: scaleX(1);
+  }
+  .nav-link.nav-contact {
+    padding: 8px 14px;
+    border: 1px solid var(--ink);
+    background: var(--accent);
+    color: var(--paper);
+    font-weight: 700;
+    box-shadow: 2px 2px 0 var(--shadow);
+  }
+  .nav-link.nav-contact::after {
+    display: none;
+  }
+  .nav-link.nav-contact:is(:hover, :focus-visible) {
+    color: var(--paper);
+    transform: translate(-1px, -1px);
+    box-shadow: 3px 3px 0 var(--shadow);
   }
   .skip-link {
     position: fixed;

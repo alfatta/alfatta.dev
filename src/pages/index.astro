@@ -1,6 +1,5 @@
 ---
 import Hero from "../components/home/Hero.astro";
-import CurrentWork from "../components/home/CurrentWork.astro";
 import AboutPreview from "../components/home/AboutPreview.astro";
 import ExperiencePreview from "../components/home/ExperiencePreview.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
@@ -26,22 +25,17 @@ const recentCompanies = getRecentCompanies(engineeringExperiences);
   description={SITE_DESCRIPTION}
 >
   <main id="main" class="site-width">
-    <Hero />
-    {currentExperience && <CurrentWork company={currentExperience.company} />}
-    <AboutPreview />
-    <ExperiencePreview experiences={recentCompanies} />
+    <Hero company={currentExperience?.company} />
     <section class="section" id="work" aria-labelledby="work-title">
       <div class="section-title" data-reveal>
         <div>
           <span class="label">From the day job</span>
           <h2 id="work-title">Featured work</h2>
         </div>
-        <span class="eyebrow" aria-hidden="true">
-          01 / PROFESSIONAL WORK
-        </span>
       </div>
       <ProjectCard project={featuredProject} />
     </section>
+    <ExperiencePreview experiences={recentCompanies} />
     <section class="section" aria-labelledby="notes-title">
       <div class="section-title" data-reveal>
         <div>
@@ -58,6 +52,7 @@ const recentCompanies = getRecentCompanies(engineeringExperiences);
         ))}
       </div>
     </section>
+    <AboutPreview />
     <ContactBanner />
   </main>
 </SiteLayout>
