@@ -1,5 +1,11 @@
 ---
 import Workstation from "../Workstation.astro";
+
+interface Props {
+  company?: string;
+}
+
+const { company } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="intro-title" data-track-location="hero">
@@ -13,24 +19,22 @@ import Workstation from "../Workstation.astro";
       <span class="hero-line"><span data-hero-line>THE WEB.</span></span>
     </h1>
     <p class="hero-intro" data-hero-copy>
-      A software developer turning ideas into thoughtful digital experiences.
-      <br />A frontend focus. A full-stack curiosity.
-      <br />
-      <strong>And a soft spot for the details.</strong>
+      A frontend-focused software developer, full-stack when the work needs it.
+      <br />Now building a desktop trading app in React, Tauri and Rust.
     </p>
     <div class="hero-actions" data-hero-copy>
-      <a class="button primary" href="#work" data-track-event="cta_click" data-track-id="explore-work">
-        Explore my work <span aria-hidden="true">↘</span>
+      <a class="button primary" href="/contact/" data-track-event="cta_click" data-track-id="hero-contact">
+        Get in touch <span aria-hidden="true">→</span>
       </a>
-      <a class="button" href="/about/" data-track-event="cta_click" data-track-id="about-me">
-        About me <span aria-hidden="true">⌘</span>
+      <a class="button" href="#work" data-track-event="cta_click" data-track-id="explore-work">
+        Explore my work <span aria-hidden="true">↘</span>
       </a>
     </div>
     <p class="hero-note" data-hero-copy>
       <span class="pixel-heart" aria-hidden="true">
         ♥
       </span>{" "}
-      8+ years of building, learning & shipping.
+      8+ years of building, learning & shipping{company ? ` · now at ${company}` : ""}.
     </p>
   </div>
   <Workstation />
@@ -82,7 +86,7 @@ import Workstation from "../Workstation.astro";
   .hero-note {
     margin-top: 18px;
     color: var(--muted);
-    font-size: 9px;
+    font-size: 11px;
     display: flex;
     gap: 12px;
     align-items: center;
