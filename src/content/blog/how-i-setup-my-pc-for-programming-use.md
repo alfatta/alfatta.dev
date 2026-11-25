@@ -7,8 +7,6 @@ pubDate: "2020-05-28T15:59:18+07:00"
 updatedDate: "2025-03-17T13:00:00+07:00"
 ---
 
-<img src="https://images.unsplash.com/photo-1587620962725-abab7fe55159?fit=crop&amp;w=800&amp;h=418&amp;fm=avif" alt="How I setup my pc for programming use" width="800" height="418" loading="eager" decoding="async" />
-
 Here's how I set up Manjaro as my daily driver for development. Manjaro is a Linux distribution based on Arch Linux, with access to community packages through the AUR. I used the [Manjaro Xfce edition](https://manjaro.org/products/download/x86/).
 
 First step is to set mirror repo to fastest one and update all installed software

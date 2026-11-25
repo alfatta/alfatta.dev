@@ -15,10 +15,14 @@ import {
 } from "../data/profile";
 import {
   engineeringExperiences,
+  groupExperiencesByCompany,
   teachingExperiences,
 } from "../data/experience";
 
 const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
+const companyGroups = groupExperiencesByCompany(engineeringExperiences);
+const recentRoles = companyGroups.slice(0, 4).flatMap((group) => group.roles);
+const olderRoles = companyGroups.slice(4).flatMap((group) => group.roles);
 ---
 
 <SiteLayout
@@ -27,7 +31,6 @@ const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
 >
   <main id="main" class="site-width page-main">
     <header class="page-heading" data-reveal>
-      <span class="label">Behind the keyboard</span>
       <h1>
         Hi, I'm Alfatta Rezqa<span aria-hidden="true">.</span>
       </h1>
@@ -40,7 +43,13 @@ const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
           <span slot="trailing">experience.log</span>
         </WindowBar>
         <div class="window-content">
-          <ExperienceTimeline experiences={engineeringExperiences} />
+          <ExperienceTimeline experiences={recentRoles} />
+          {olderRoles.length > 0 && (
+            <details class="older-roles">
+              <summary>Earlier roles ({olderRoles.length})</summary>
+              <ExperienceTimeline experiences={olderRoles} />
+            </details>
+          )}
           <a
             class="text-link experience-source"
             href="https://www.linkedin.com/in/alfattarezqa/details/experience/"
@@ -93,7 +102,6 @@ const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
     <section class="section" aria-labelledby="projects-title">
       <div class="section-title" data-reveal>
         <div>
-          <span class="label">Side projects</span>
           <h2 id="projects-title">On my workbench</h2>
         </div>
       </div>
@@ -110,7 +118,6 @@ const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
     <section class="section" aria-labelledby="elsewhere-title">
       <div class="section-title" data-reveal>
         <div>
-          <span class="label">Around the internet</span>
           <h2 id="elsewhere-title">Let's stay connected</h2>
         </div>
       </div>
@@ -150,6 +157,17 @@ const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
   .experience-source {
     margin-top: 18px;
   }
+  .older-roles {
+    margin-top: 25px;
+    padding-top: 18px;
+    border-top: 1px dashed var(--line);
+  }
+  .older-roles summary {
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 18px;
+  }
   .stack-list {
     display: flex;
     flex-wrap: wrap;
@@ -159,7 +177,7 @@ const manjaroPostSlug = "how-i-setup-my-pc-for-programming-use";
     padding: 5px 8px;
     border: 1px solid var(--line);
     background: var(--blue);
-    font-size: 11px;
+    font-size: 12px;
   }
   .toolkit-note {
     margin-top: 16px;

@@ -7,8 +7,6 @@ pubDate: "2020-05-31T11:59:10+07:00"
 updatedDate: "2026-11-20"
 ---
 
-<img src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?fit=crop&amp;w=800&amp;h=418&amp;fm=avif" alt="Forward domain handled with cloudflare to DEV.TO" width="800" height="418" loading="eager" decoding="async" />
-
 When I moved my writing to DEV.to, I wanted visitors to my old `/blog` link to land on my DEV.to profile without moving the rest of my site. This post originally used a Cloudflare Page Rule. For a new setup, use a Single Redirect instead.
 
 ## Create a redirect for the blog landing page
