@@ -5,13 +5,22 @@ import CoffeeHeatmap from "../components/CoffeeHeatmap.astro";
 import CoffeeStats from "../components/CoffeeStats.astro";
 import CoffeeBars from "../components/CoffeeBars.astro";
 import CoffeePhoto from "../components/CoffeePhoto.astro";
+import PixelIcon from "../components/PixelIcon.astro";
+import ContactBanner from "../components/ContactBanner.astro";
 import { SITE_TITLE } from "../consts";
 import { buildHeatmap, formatHour, getCoffeeSummary } from "../data/coffee";
+import { COFFEE_START } from "../data/coffee-log";
 
 const summary = getCoffeeSummary();
 const heatmap = buildHeatmap(summary, 26, 26);
 const peakMax = Math.max(1, summary.peakCount);
 const cupLabel = (n: number) => `${n} ${n === 1 ? "cup" : "cups"}`;
+const startLabel = new Date(`${COFFEE_START}T00:00:00Z`).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+  timeZone: "UTC",
+});
 const stats = [
   { label: "Total cups", value: summary.total },
   { label: "Today", value: summary.todayCount },
@@ -30,51 +39,82 @@ const stats = [
       <p>Every cup of coffee I drink: what it was, when, and where.</p>
     </header>
 
-    <section aria-labelledby="overview-title" data-track-location="coffee-overview">
-      <div class="section-title" data-reveal>
-        <div>
-          <h2 id="overview-title">Overview</h2>
+    {summary.total === 0 ? (
+      <section class="section" aria-labelledby="start-title" data-track-location="coffee-empty">
+        <div class="section-title" data-reveal>
+          <div>
+            <h2 id="start-title">Not brewed yet</h2>
+          </div>
         </div>
-      </div>
-      <div class="overview-grid">
         <div class="window" data-reveal>
           <WindowBar>
-            <span>▦ &nbsp; activity.map</span>
+            <span>▤ &nbsp; coffee.log</span>
+            <span slot="trailing">0 CUPS</span>
           </WindowBar>
-          <div class="window-content">
+          <div class="window-content coffee-empty">
+            <PixelIcon name="cup" class="coffee-empty-icon" />
+            <div class="coffee-empty-copy">
+              <p class="coffee-empty-title">The log opens on {startLabel}.</p>
+              <p class="muted">
+                Every cup gets one line: the drink, the time, and where I drank
+                it. Once the first one lands, this page fills in with peak
+                hours, the places I keep going back to, and the day-by-day
+                list. The calendar below is waiting for it.
+              </p>
+            </div>
+          </div>
+          <div class="window-content coffee-empty-map">
+            <p class="eyebrow">Activity map</p>
             <CoffeeHeatmap
               weeks={heatmap}
-              label={`Heatmap of daily coffee: ${cupLabel(summary.total)} over ${summary.daysLogged} logged days.`}
+              label="Heatmap of daily coffee: no cups logged yet."
             />
           </div>
         </div>
-        <div class="window" data-reveal>
-          <WindowBar>
-            <span>▤ &nbsp; stats.sys</span>
-          </WindowBar>
-          <div class="window-content">
-            <CoffeeStats items={stats} />
+      </section>
+    ) : (
+      <>
+        <section aria-labelledby="overview-title" data-track-location="coffee-overview">
+          <div class="section-title" data-reveal>
+            <div>
+              <h2 id="overview-title">Overview</h2>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
+          <div class="overview-grid">
+            <div class="window" data-reveal>
+              <WindowBar>
+                <span>▦ &nbsp; activity.map</span>
+              </WindowBar>
+              <div class="window-content">
+                <CoffeeHeatmap
+                  weeks={heatmap}
+                  label={`Heatmap of daily coffee: ${cupLabel(summary.total)} over ${summary.daysLogged} logged days.`}
+                />
+              </div>
+            </div>
+            <div class="window" data-reveal>
+              <WindowBar>
+                <span>▤ &nbsp; stats.sys</span>
+              </WindowBar>
+              <div class="window-content">
+                <CoffeeStats items={stats} />
+              </div>
+            </div>
+          </div>
+        </section>
 
-    <section class="section" aria-labelledby="patterns-title" data-track-location="coffee-patterns">
-      <div class="section-title" data-reveal>
-        <div>
-          <h2 id="patterns-title">Patterns</h2>
-        </div>
-      </div>
-      <div class="patterns-grid">
-        <div class="window hours-window" data-reveal>
-          <WindowBar>
-            <span>▥ &nbsp; peak-hours.chart</span>
-          </WindowBar>
-          <div class="window-content">
-            {summary.peakHour === null ? (
-              <p class="muted">Nothing logged yet.</p>
-            ) : (
-              <>
+        <section class="section" aria-labelledby="patterns-title" data-track-location="coffee-patterns">
+          <div class="section-title" data-reveal>
+            <div>
+              <h2 id="patterns-title">Patterns</h2>
+            </div>
+          </div>
+          <div class="patterns-grid">
+            <div class="window hours-window" data-reveal>
+              <WindowBar>
+                <span>▥ &nbsp; peak-hours.chart</span>
+              </WindowBar>
+              <div class="window-content">
                 <ol class="hours" aria-label="Cups by hour of day">
                   {summary.hours.map((count, hour) => (
                     <li title={`${formatHour(hour)} · ${cupLabel(count)}`} style={`--share: ${(count / peakMax) * 100}%`}>
@@ -86,64 +126,62 @@ const stats = [
                 <div class="hours-axis" aria-hidden="true">
                   <span>00</span><span>06</span><span>12</span><span>18</span><span>23</span>
                 </div>
-                <p class="muted">Peak at {formatHour(summary.peakHour)} · {cupLabel(summary.peakCount)}</p>
-              </>
-            )}
-          </div>
-        </div>
-        <div class="window" data-reveal>
-          <WindowBar>
-            <span>▤ &nbsp; places.txt</span>
-          </WindowBar>
-          <div class="window-content">
-            <CoffeeBars items={summary.places} />
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" aria-labelledby="log-title" data-track-location="coffee-log">
-      <div class="section-title" data-reveal>
-        <div>
-          <h2 id="log-title">Daily log</h2>
-        </div>
-      </div>
-      {summary.months.length === 0 ? (
-        <p class="muted" data-reveal>No cups logged yet. The first entry lands here.</p>
-      ) : (
-        summary.months.map((month, index) => (
-          <details class="month" open={index === 0} data-reveal>
-            <summary>
-              <span>{month.label}</span>
-              <span class="chip">{cupLabel(month.total)}</span>
-            </summary>
-            <div class="window">
-              <WindowBar>
-                <span>▤ &nbsp; {month.key}.log</span>
-                <span slot="trailing">{cupLabel(month.total).toUpperCase()}</span>
-              </WindowBar>
-              <ol class="cups">
-                {month.days.flatMap((day) =>
-                  day.cups.map((cup, i) => (
-                    <li class:list={{ "day-start": i === 0 }}>
-                      <span class="cup-date">{i === 0 && `${day.weekday.slice(0, 3)} ${day.date.slice(8)}`}</span>
-                      <time class="cup-time">{cup.time}</time>
-                      <span class="cup-drink">
-                        {cup.drink}
-                        {cup.venue && <small>{cup.venue}</small>}
-                        {cup.note && <small>{cup.note}</small>}
-                      </span>
-                      <span class="chip">{cup.place}</span>
-                      <span class="cup-thumb"><CoffeePhoto cup={cup} /></span>
-                    </li>
-                  )),
-                )}
-              </ol>
+                <p class="muted">Peak at {formatHour(summary.peakHour ?? 0)} · {cupLabel(summary.peakCount)}</p>
+              </div>
             </div>
-          </details>
-        ))
-      )}
-    </section>
+            <div class="window" data-reveal>
+              <WindowBar>
+                <span>▤ &nbsp; places.txt</span>
+              </WindowBar>
+              <div class="window-content">
+                <CoffeeBars items={summary.places} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="section" aria-labelledby="log-title" data-track-location="coffee-log">
+          <div class="section-title" data-reveal>
+            <div>
+              <h2 id="log-title">Daily log</h2>
+            </div>
+          </div>
+          {summary.months.map((month, index) => (
+            <details class="month" open={index === 0} data-reveal>
+              <summary>
+                <span>{month.label}</span>
+                <span class="chip">{cupLabel(month.total)}</span>
+              </summary>
+              <div class="window">
+                <WindowBar>
+                  <span>▤ &nbsp; {month.key}.log</span>
+                  <span slot="trailing">{cupLabel(month.total).toUpperCase()}</span>
+                </WindowBar>
+                <ol class="cups">
+                  {month.days.flatMap((day) =>
+                    day.cups.map((cup, i) => (
+                      <li class:list={{ "day-start": i === 0 }}>
+                        <span class="cup-date">{i === 0 && `${day.weekday.slice(0, 3)} ${day.date.slice(8)}`}</span>
+                        <time class="cup-time">{cup.time}</time>
+                        <span class="cup-drink">
+                          {cup.drink}
+                          {cup.venue && <small>{cup.venue}</small>}
+                          {cup.note && <small>{cup.note}</small>}
+                        </span>
+                        <span class="chip">{cup.place}</span>
+                        <span class="cup-thumb"><CoffeePhoto cup={cup} /></span>
+                      </li>
+                    )),
+                  )}
+                </ol>
+              </div>
+            </details>
+          ))}
+        </section>
+      </>
+    )}
+
+    <ContactBanner />
   </main>
   <dialog class="lightbox window" id="coffee-lightbox" aria-label="Coffee photo">
     <WindowBar>
@@ -152,7 +190,7 @@ const stats = [
         <button class="lightbox-close" aria-label="Close photo">×</button>
       </form>
     </WindowBar>
-    <img alt="" />
+    <div class="lightbox-body"></div>
   </dialog>
 </SiteLayout>
 
@@ -162,6 +200,38 @@ const stats = [
   }
   .muted {
     color: var(--muted);
+  }
+  .coffee-empty {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .coffee-empty-icon {
+    width: 64px;
+    height: 64px;
+    flex: none;
+  }
+  .coffee-empty-copy {
+    display: grid;
+    gap: 10px;
+    max-width: 62ch;
+  }
+  .coffee-empty-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .coffee-empty-map .eyebrow {
+    margin-bottom: 14px;
+  }
+  @media (max-width: 600px) {
+    .coffee-empty {
+      gap: 16px;
+    }
+    .coffee-empty-icon {
+      width: 46px;
+      height: 46px;
+    }
   }
   .overview-grid {
     display: grid;
@@ -315,15 +385,21 @@ const stats = [
 
 <script>
   const dialog = document.querySelector<HTMLDialogElement>("#coffee-lightbox");
-  const image = dialog?.querySelector("img");
+  const body = dialog?.querySelector<HTMLElement>(".lightbox-body");
   const caption = document.querySelector("#coffee-lightbox-caption");
+  // The image only exists once a photo is opened, so the page never ships an empty one.
+  let image: HTMLImageElement | undefined;
 
   // Without JS the thumbnail is a plain link to the full-size image.
   document.addEventListener("click", (event) => {
-    if (!dialog || !image || !caption || !(event.target instanceof Element)) return;
+    if (!dialog || !body || !caption || !(event.target instanceof Element)) return;
     const link = event.target.closest<HTMLAnchorElement>("a[data-lightbox]");
     if (link) {
       event.preventDefault();
+      if (!image) {
+        image = document.createElement("img");
+        body.append(image);
+      }
       image.src = link.href;
       image.alt = link.dataset.alt ?? "";
       caption.textContent = `▧   ${link.dataset.alt ?? "photo"}`;

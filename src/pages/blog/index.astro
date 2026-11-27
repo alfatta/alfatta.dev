@@ -2,6 +2,7 @@
 import SiteLayout from "../../layouts/SiteLayout.astro";
 import { getCollection } from "astro:content";
 import PostCard from "../../components/PostCard.astro";
+import ContactBanner from "../../components/ContactBanner.astro";
 import { SITE_TITLE } from "../../consts";
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -28,11 +29,12 @@ const posts = (await getCollection("blog")).sort(
         <PostCard
           post={post}
           index={index}
-          variant="detailed"
+          variant={index === 0 ? "featured" : "detailed"}
           headingLevel="h2"
         />
       ))}
     </div>
+    <ContactBanner />
   </main>
 </SiteLayout>
 

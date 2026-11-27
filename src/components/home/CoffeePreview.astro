@@ -3,7 +3,9 @@ import WindowBar from "../WindowBar.astro";
 import CoffeeHeatmap from "../CoffeeHeatmap.astro";
 import CoffeeStats from "../CoffeeStats.astro";
 import CoffeePhoto from "../CoffeePhoto.astro";
+import PixelIcon from "../PixelIcon.astro";
 import { buildHeatmap, formatCupDay, type CoffeeSummary } from "../../data/coffee";
+import { COFFEE_START } from "../../data/coffee-log";
 
 interface Props {
   summary: CoffeeSummary;
@@ -12,6 +14,11 @@ interface Props {
 const { summary } = Astro.props;
 const weeks = buildHeatmap(summary, 18, 18);
 const { latest } = summary;
+const startLabel = new Date(`${COFFEE_START}T00:00:00Z`).toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "long",
+  timeZone: "UTC",
+});
 const stats = [
   { label: "Today", value: summary.todayCount },
   { label: "Last 7 days", value: summary.last7 },
@@ -36,19 +43,27 @@ const stats = [
     </WindowBar>
     <div class="window-content coffee-preview">
       <div class="coffee-preview-main">
-        <p class="eyebrow">Latest cup</p>
         {latest ? (
+          <>
+            <p class="eyebrow">Latest cup</p>
+            <div class="latest-row">
+              <CoffeePhoto cup={latest} size={72} />
+              <p class="latest">
+                <strong>{latest.drink}</strong>
+                <span>{formatCupDay(latest.date, summary.today)} {latest.time} · {latest.place}{latest.venue && ` · ${latest.venue}`}</span>
+              </p>
+            </div>
+            <CoffeeStats items={stats} />
+          </>
+        ) : (
           <div class="latest-row">
-            <CoffeePhoto cup={latest} size={72} />
+            <PixelIcon name="cup" class="coffee-preview-icon" />
             <p class="latest">
-              <strong>{latest.drink}</strong>
-              <span>{formatCupDay(latest.date, summary.today)} {latest.time} · {latest.place}{latest.venue && ` · ${latest.venue}`}</span>
+              <strong>No cups logged yet.</strong>
+              <span>The log opens on {startLabel}: one line per cup, with the time and the place.</span>
             </p>
           </div>
-        ) : (
-          <p class="latest"><span>No cups logged yet.</span></p>
         )}
-        <CoffeeStats items={stats} />
       </div>
       <CoffeeHeatmap
         weeks={weeks}
@@ -79,10 +94,18 @@ const stats = [
     gap: 2px;
   }
   .latest strong {
-    font-size: 17px;
+    font-size: 16px;
   }
   .latest span {
     color: var(--muted);
+  }
+  .coffee-preview-icon {
+    width: 56px;
+    height: 56px;
+    flex: none;
+  }
+  .latest span {
+    max-width: 46ch;
   }
   @media (max-width: 700px) {
     .coffee-preview {

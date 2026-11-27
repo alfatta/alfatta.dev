@@ -5,8 +5,16 @@ import FormattedDate from "../components/FormattedDate.astro";
 import WindowBar from "../components/WindowBar.astro";
 import { SITE_TITLE } from "../consts";
 import { ABOUT } from "../data/profile";
-type Props = CollectionEntry<"blog">["data"];
-const { title, description, pubDate, updatedDate, heroImageUrl } = Astro.props;
+interface Sibling {
+  id: string;
+  title: string;
+}
+type Props = CollectionEntry<"blog">["data"] & {
+  prev?: Sibling;
+  next?: Sibling;
+};
+const { title, description, pubDate, updatedDate, heroImageUrl, prev, next } =
+  Astro.props;
 ---
 
 <SiteLayout
@@ -43,18 +51,38 @@ const { title, description, pubDate, updatedDate, heroImageUrl } = Astro.props;
       <div class="prose" data-track-article data-track-location="article-body">
         <slot />
       </div>
+      <footer class="article-footer">
+        <p class="article-sign">
+          Thanks for reading. Questions or corrections are welcome &mdash;
+          <a href="/contact/" data-track-event="cta_click" data-track-location="article-footer" data-track-id="contact">write to me</a>.
+        </p>
+        <nav class="article-nav" aria-label="More posts">
+          {next && (
+            <a class="article-nav-link" href={`/blog/${next.id}/`} data-track-event="article_link_click" data-track-location="article-footer" data-track-id={`next-${next.id}`}>
+              <span class="eyebrow">Newer post</span>
+              <span class="article-nav-title">{next.title}</span>
+            </a>
+          )}
+          {prev && (
+            <a class="article-nav-link article-nav-link--prev" href={`/blog/${prev.id}/`} data-track-event="article_link_click" data-track-location="article-footer" data-track-id={`prev-${prev.id}`}>
+              <span class="eyebrow">Older post</span>
+              <span class="article-nav-title">{prev.title}</span>
+            </a>
+          )}
+        </nav>
+      </footer>
     </article>
   </main>
 </SiteLayout>
 
 <style>
   .article-main {
-    max-width: 850px;
+    max-width: 700px;
     padding-top: 36px;
   }
   .article-header {
     border-bottom: 1px solid var(--line);
-    padding: 36px;
+    padding: 32px;
   }
   .article-header h1 {
     font-size: clamp(34px, 4.6vw, 52px);
@@ -72,10 +100,17 @@ const { title, description, pubDate, updatedDate, heroImageUrl } = Astro.props;
     color: var(--muted);
   }
   .prose {
-    padding: 36px;
+    padding: 32px;
     font-size: 14px;
     line-height: 1.95;
-    overflow-wrap: anywhere;
+    overflow-wrap: break-word;
+  }
+  .prose :global(a) {
+    text-decoration-color: var(--line);
+  }
+  .prose :global(a:is(:hover, :focus-visible)) {
+    color: var(--accent);
+    text-decoration-color: currentColor;
   }
   .prose :global(p) {
     margin-bottom: 24px;
@@ -126,6 +161,58 @@ const { title, description, pubDate, updatedDate, heroImageUrl } = Astro.props;
     padding: 5px 20px;
     margin: 25px 0;
   }
+  .article-footer {
+    border-top: 1px solid var(--line);
+  }
+  .article-sign {
+    padding: 20px 32px;
+    border-bottom: 1px solid var(--line);
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .article-sign a {
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration-color: var(--line);
+  }
+  .article-sign a:is(:hover, :focus-visible) {
+    color: var(--accent);
+    text-decoration-color: currentColor;
+  }
+  .article-nav {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .article-nav:has(.article-nav-link:only-child) {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .article-nav-link {
+    display: grid;
+    gap: 7px;
+    padding: 18px 32px 22px;
+    text-decoration: none;
+    transition: background 0.18s;
+  }
+  .article-nav-link + .article-nav-link {
+    border-left: 1px solid var(--line);
+  }
+  .article-nav-link:is(:hover, :focus-visible) {
+    background: var(--blue);
+  }
+  .article-nav-link:focus-visible {
+    outline-offset: -3px;
+  }
+  .article-nav-link--prev:not(:only-child) {
+    text-align: right;
+  }
+  .article-nav-link--prev:not(:only-child) .eyebrow {
+    justify-content: flex-end;
+  }
+  .article-nav-title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.5;
+  }
   .back-link {
     margin-bottom: 24px;
   }
@@ -142,6 +229,25 @@ const { title, description, pubDate, updatedDate, heroImageUrl } = Astro.props;
     }
     .article-date {
       font-size: 11px;
+    }
+    .article-sign {
+      padding: 18px 20px;
+    }
+    .article-nav {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .article-nav-link {
+      padding: 16px 20px;
+    }
+    .article-nav-link + .article-nav-link {
+      border-left: 0;
+      border-top: 1px solid var(--line);
+    }
+    .article-nav-link--prev:not(:only-child) {
+      text-align: left;
+    }
+    .article-nav-link--prev:not(:only-child) .eyebrow {
+      justify-content: flex-start;
     }
   }
 </style>

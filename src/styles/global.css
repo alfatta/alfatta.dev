@@ -28,6 +28,21 @@
   --shadow: #080f1b;
   --grid: rgba(165, 203, 238, 0.055);
 }
+/* Shiki runs with `theme: css-variables`, so code reads from the palette:
+   ink for identifiers, accent for keywords and strings, muted for comments. */
+:root {
+  --astro-code-foreground: var(--ink);
+  --astro-code-background: var(--paper);
+  --astro-code-token-constant: var(--ink);
+  --astro-code-token-function: var(--ink);
+  --astro-code-token-parameter: var(--ink);
+  --astro-code-token-keyword: var(--accent);
+  --astro-code-token-string: var(--accent);
+  --astro-code-token-string-expression: var(--accent);
+  --astro-code-token-link: var(--accent);
+  --astro-code-token-comment: var(--muted);
+  --astro-code-token-punctuation: var(--muted);
+}
 @theme {
   --font-mono: "Maple Mono", monospace;
   --font-display: "VT323", monospace;
@@ -39,6 +54,7 @@
   html {
     scroll-behavior: smooth;
     scroll-padding-top: 100px;
+    scrollbar-color: var(--line) var(--paper);
   }
   body {
     margin: 0;
@@ -47,6 +63,7 @@
     font-family: var(--font-mono);
     font-size: 14px;
     line-height: 1.75;
+    caret-color: var(--accent);
   }
   button,
   a {
