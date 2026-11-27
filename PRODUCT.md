@@ -22,8 +22,8 @@ Personal website, portfolio and blog of Alfatta Rezqa, a software developer with
 Open decision: the user did not state a distinguishing claim. The repo supplies a hypothesis, not confirmed fact: a personal site with real professional work (Ajaib Terminal, PixRelay), writing on frontend and Vue, and a retro-desktop personality.
 
 ## Operating Context
-- Pages: Home, About, Blog (with RSS), Uses (illustrated gear and tool inventory), Contact.
-- Content lives in `src/data/profile.ts`, `src/data/experience.ts` and `src/content/blog/` (Markdown and MDX).
+- Pages: Home, About, Blog (with RSS), Uses (illustrated gear and tool inventory), Coffee (hand-logged daily coffee), Contact.
+- Content lives in `src/data/profile.ts`, `src/data/experience.ts`, `src/data/coffee-log.ts` and `src/content/blog/` (Markdown and MDX).
 - Analytics: Umami and Ahrefs Analytics. Conversion events are tracked per README, e.g. `cta_click` and `email_click`.
 
 ## Capabilities and Constraints

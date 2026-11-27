@@ -1,6 +1,7 @@
 ---
 import Hero from "../components/home/Hero.astro";
 import AboutPreview from "../components/home/AboutPreview.astro";
+import CoffeePreview from "../components/home/CoffeePreview.astro";
 import ExperiencePreview from "../components/home/ExperiencePreview.astro";
 import SiteLayout from "../layouts/SiteLayout.astro";
 import ProjectCard from "../components/ProjectCard.astro";
@@ -14,10 +15,12 @@ import {
   engineeringExperiences,
   getRecentCompanies,
 } from "../data/experience";
+import { getCoffeeSummary } from "../data/coffee";
 const posts = (await getCollection("blog"))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
   .slice(0, 3);
 const recentCompanies = getRecentCompanies(engineeringExperiences);
+const coffee = getCoffeeSummary();
 ---
 
 <SiteLayout
@@ -50,6 +53,7 @@ const recentCompanies = getRecentCompanies(engineeringExperiences);
         ))}
       </div>
     </section>
+    <CoffeePreview summary={coffee} />
     <AboutPreview />
     <ContactBanner />
   </main>

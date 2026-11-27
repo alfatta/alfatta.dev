@@ -1,0 +1,62 @@
+---
+import type { Tally } from "../data/coffee";
+
+interface Props {
+  items: Tally[];
+  limit?: number;
+}
+
+const { items, limit = 5 } = Astro.props;
+const shown = items.slice(0, limit);
+const max = shown[0]?.count ?? 1;
+---
+
+{shown.length === 0 ? (
+  <p class="empty">Nothing logged yet.</p>
+) : (
+  <ol class="coffee-bars">
+    {shown.map(({ label, count }) => (
+      <li style={`--share: ${(count / max) * 100}%`}>
+        <span class="name">{label}</span>
+        <span class="count">{count}</span>
+        <span class="bar" aria-hidden="true"><i></i></span>
+      </li>
+    ))}
+  </ol>
+)}
+
+<style>
+  .coffee-bars {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .coffee-bars li {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 4px 12px;
+  }
+  .name {
+    overflow-wrap: anywhere;
+  }
+  .count {
+    font-weight: 700;
+  }
+  .bar {
+    grid-column: 1 / -1;
+    height: 8px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+  }
+  .bar i {
+    display: block;
+    width: var(--share);
+    height: 100%;
+    background: var(--accent);
+  }
+  .empty {
+    color: var(--muted);
+  }
+</style>
