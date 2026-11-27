@@ -1,0 +1,137 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import PixelIcon from "../components/PixelIcon.astro";
+import WindowBar from "../components/WindowBar.astro";
+import { SITE_TITLE } from "../consts";
+
+const destinations = [
+  { href: "/", label: "Home", note: "The workstation and the latest work." },
+  { href: "/blog/", label: "Writing", note: "Notes on frontend, Vue and tooling." },
+  { href: "/uses/", label: "Uses", note: "The gear and tools I work with." },
+  { href: "/contact/", label: "Contact", note: "Mail me; I answer." },
+];
+---
+
+<SiteLayout
+  title={`Page not found | ${SITE_TITLE}`}
+  description="That page is not on this site. Here is the way back."
+>
+  <main id="main" class="site-width page-main notfound-page">
+    <header class="page-heading" data-reveal>
+      <h1>Not found.</h1>
+      <p>
+        The address you opened is not on this site. It may have moved, or the
+        link may have a typo in it.
+      </p>
+    </header>
+
+    <div class="window" data-reveal>
+      <WindowBar>
+        <span>▧ &nbsp; error-404.sys</span>
+      </WindowBar>
+      <div class="window-content notfound-body">
+        <PixelIcon name="folder" class="notfound-icon" />
+        <div class="notfound-copy">
+          <p class="notfound-title">No such file or directory.</p>
+          <p class="muted">Pick a door below, or go back where you came from.</p>
+        </div>
+      </div>
+      <ul class="notfound-list">
+        {destinations.map(({ href, label, note }) => (
+          <li>
+            <a href={href} data-track-event="navigation_click" data-track-location="not-found" data-track-id={`404-${label.toLowerCase()}`}>
+              <span class="notfound-label">{label}</span>
+              <span class="muted">{note}</span>
+              <span class="notfound-arrow" aria-hidden="true">→</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </main>
+</SiteLayout>
+
+<style>
+  .notfound-page {
+    padding-bottom: clamp(40px, 6vw, 80px);
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .notfound-body {
+    display: flex;
+    align-items: flex-start;
+    gap: 22px;
+    border-bottom: 1px solid var(--line);
+  }
+  .notfound-icon {
+    width: 64px;
+    height: 64px;
+    flex: none;
+  }
+  .notfound-copy {
+    display: grid;
+    gap: 8px;
+    max-width: 58ch;
+  }
+  .notfound-title {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .notfound-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .notfound-list li + li a {
+    border-top: 1px solid var(--line);
+  }
+  .notfound-list a {
+    display: grid;
+    grid-template-columns: 140px minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 16px;
+    padding: 16px 22px;
+    text-decoration: none;
+    transition: background 0.18s;
+  }
+  .notfound-list a:is(:hover, :focus-visible) {
+    background: var(--blue);
+  }
+  .notfound-list a:focus-visible {
+    outline-offset: -3px;
+  }
+  .notfound-label {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .notfound-arrow {
+    transition: transform 0.18s ease-out;
+  }
+  .notfound-list a:is(:hover, :focus-visible) .notfound-arrow {
+    transform: translateX(3px);
+  }
+  @media (max-width: 600px) {
+    .notfound-body {
+      gap: 16px;
+    }
+    .notfound-icon {
+      width: 46px;
+      height: 46px;
+    }
+    .notfound-list a {
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 4px 16px;
+      padding: 14px 18px;
+    }
+    .notfound-list .muted {
+      grid-column: 1;
+      font-size: 12px;
+    }
+    .notfound-arrow {
+      grid-column: 2;
+      grid-row: 1 / span 2;
+      align-self: center;
+    }
+  }
+</style>

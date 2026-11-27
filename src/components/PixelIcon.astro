@@ -167,4 +167,13 @@ const { name = "chip", class: className, ...attributes } = Astro.props;
       <path d="M38 5H42V11H47V15H42V21H38V15H33V11H38z" fill="var(--accent)" />
     </>
   )}
+  {name === "cup" && (
+    <>
+      <path d="M17 5V13M23 2V13M29 5V13" stroke="currentColor" stroke-width="2" />
+      <path d="M11 17H33V33H11z" fill="var(--surface)" stroke="currentColor" stroke-width="2" />
+      <path d="M15 21H29V29H15z" fill="var(--accent)" />
+      <path d="M33 21H39V29H33" stroke="currentColor" stroke-width="2" />
+      <path d="M7 37H37V41H7z" fill="var(--blue-deep)" stroke="currentColor" stroke-width="2" />
+    </>
+  )}
 </svg>

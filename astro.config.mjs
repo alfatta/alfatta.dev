@@ -10,6 +10,10 @@ export default defineConfig({
 	site: 'https://alfatta.dev',
 	trailingSlash: 'always',
 	integrations: [mdx(), sitemap()],
+	markdown: {
+		// Code tokens read from the palette so both themes stay in system.
+		shikiConfig: { theme: 'css-variables' },
+	},
 	vite: {
 		plugins: [tailwindcss()],
 	},

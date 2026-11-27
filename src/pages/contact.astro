@@ -48,25 +48,25 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
           <h2 id="social-title">Around the internet</h2>
           <span slot="trailing" aria-hidden="true">social.links</span>
         </WindowBar>
-        <div class="window-content social-content" data-track-location="contact-social">
+        <div class="window-content social-intro-row" data-track-location="contact-social">
           <p class="social-intro">Connect, follow along, or see what I'm working on.</p>
-          <ul class="social-list">
-            {socialLinks.map((contact) => (
-              <li>
-                <a class="social-link" href={contact.href} target="_blank" rel="noreferrer"
-                  data-track-event="social_click" data-track-id={contact.id} data-track-platform={contact.id}>
-                  <div class="social-heading">
-                    <h3>{contact.label}</h3>
-                    <span aria-hidden="true">↗</span>
-                  </div>
-                  <span class="social-handle">@{contact.handle}</span>
-                  <p>{contact.description}</p>
-                  <span class="sr-only"> (opens in a new tab)</span>
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
+        <ul class="social-list" data-track-location="contact-social">
+          {socialLinks.map((contact) => (
+            <li>
+              <a class="social-link" href={contact.href} target="_blank" rel="noreferrer"
+                data-track-event="social_click" data-track-id={contact.id} data-track-platform={contact.id}>
+                <span class="social-heading">
+                  <h3>{contact.label}</h3>
+                  <span class="social-handle">@{contact.handle}</span>
+                </span>
+                <p>{contact.description}</p>
+                <span class="social-arrow" aria-hidden="true">↗</span>
+                <span class="sr-only"> (opens in a new tab)</span>
+              </a>
+            </li>
+          ))}
+        </ul>
       </section>
     </div>
 
@@ -87,10 +87,16 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
     gap: 18px;
   }
+  .email-window {
+    display: grid;
+    grid-template-rows: auto minmax(0, 1fr);
+  }
   .email-content {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    justify-content: center;
+    height: 100%;
     gap: 14px;
   }
   .contact-icon {
@@ -113,7 +119,7 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
     font-size: 12px;
   }
   .email-address {
-    font-size: clamp(15px, 2vw, 20px);
+    font-size: clamp(16px, 2vw, 21px);
     font-weight: 700;
     overflow-wrap: anywhere;
   }
@@ -124,56 +130,58 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
     font-size: 11px;
     color: var(--muted);
   }
-  .social-content {
-    display: grid;
-    gap: 16px;
+  .social-intro-row {
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
   }
   .social-list {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
     margin: 0;
     padding: 0;
     list-style: none;
   }
+  .social-list li + li .social-link {
+    border-top: 1px solid var(--line);
+  }
   .social-link {
-    display: block;
-    height: 100%;
-    padding: 16px;
-    border: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    gap: 6px 16px;
+    padding: 15px 22px;
     text-decoration: none;
-    transition:
-      background 0.18s,
-      transform 0.18s,
-      box-shadow 0.18s;
+    transition: background 0.18s;
   }
   .social-link:is(:hover, :focus-visible) {
     background: var(--blue);
-    transform: translate(-2px, -2px);
-    box-shadow: 3px 3px 0 var(--shadow);
+  }
+  .social-link:focus-visible {
+    outline-offset: -3px;
   }
   .social-heading {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 10px;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 4px 12px;
   }
   .social-heading h3 {
-    font-size: 14px;
+    font-size: 16px;
   }
-  .social-heading > span {
+  .social-arrow {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
     transition: transform 0.18s ease-out;
   }
-  .social-link:is(:hover, :focus-visible) .social-heading > span {
+  .social-link:is(:hover, :focus-visible) .social-arrow {
     transform: translate(2px, -2px);
   }
   .social-handle {
     font-size: 12px;
+    color: var(--muted);
     overflow-wrap: anywhere;
   }
   .social-link p {
-    margin-top: 12px;
+    grid-column: 1;
     font-size: 11px;
     color: var(--muted);
   }
@@ -199,13 +207,16 @@ import { ABOUT, emailContact, socialLinks } from "../data/profile";
     .contact-grid {
       grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
     }
-    .social-list {
-      grid-template-columns: 1fr;
-    }
   }
   @media (max-width: 600px) {
     .contact-grid {
       grid-template-columns: 1fr;
+    }
+    .social-intro-row {
+      padding-bottom: 16px;
+    }
+    .social-link {
+      padding: 14px 18px;
     }
     .contact-signoff .text-link {
       margin-left: 0;

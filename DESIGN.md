@@ -27,6 +27,30 @@ typography:
     fontWeight: 400
     lineHeight: 1.1
     letterSpacing: "0.01em"
+  display-hero:
+    fontFamily: "VT323, monospace"
+    fontSize: "clamp(48px, 7.4vw, 96px)"
+    fontWeight: 400
+    lineHeight: 0.9
+    letterSpacing: "0.01em"
+  display-article:
+    fontFamily: "VT323, monospace"
+    fontSize: "clamp(34px, 4.6vw, 52px)"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "0.01em"
+  display-panel:
+    fontFamily: "VT323, monospace"
+    fontSize: "clamp(30px, 4vw, 46px)"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "0.01em"
+  headline-mobile:
+    fontFamily: "VT323, monospace"
+    fontSize: "36px"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "0.01em"
   headline:
     fontFamily: "VT323, monospace"
     fontSize: "42px"
@@ -48,6 +72,47 @@ typography:
     fontSize: "10px"
     fontWeight: 700
     letterSpacing: "1.3px"
+  card-display:
+    fontFamily: "VT323, monospace"
+    fontSize: "46px"
+    fontWeight: 400
+    lineHeight: 1.1
+    letterSpacing: "0.01em"
+  card-title:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "24px"
+    fontWeight: 400
+    lineHeight: 1.45
+  prose-heading:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "21px"
+    fontWeight: 700
+    lineHeight: 1.4
+  list-title:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "18px"
+    fontWeight: 400
+    lineHeight: 1.6
+  secondary:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "13px"
+    fontWeight: 400
+    lineHeight: 1.75
+  support:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.75
+  meta:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "11px"
+    fontWeight: 400
+    lineHeight: 1.6
+  micro:
+    fontFamily: "Maple Mono, monospace"
+    fontSize: "9px"
+    fontWeight: 700
+    letterSpacing: "0.7px"
 rounded:
   none: "0px"
 spacing:
@@ -123,7 +188,11 @@ Cool navy and steel blue on warm cream. The warmth lives only in the paper, so t
 ### Named Rules
 **The One Accent Rule.** Steel Ink Blue is the only accent. Do not add a second hue; hierarchy comes from ink, muted, and blue tints.
 
+**The Artwork Tint Exception.** Illustration panels on the Uses page may sit on a desaturated wash mixed into the surface (`color-mix(in srgb, var(--surface) 75%, #84a68e)` for the phone, `#c2a275` for the earbuds) so adjacent devices read apart at a glance. The wash is a ground under drawn artwork only: it never reaches text, borders, chips, buttons, or state.
+
 **The Paper-Not-White Rule.** Grounds are warm cream (#f8f6ef, #fffdf7), never pure white. Text is navy ink, never pure black.
+
+**The Code-Reads-From-The-Palette Rule.** Shiki runs with `theme: css-variables`; `--astro-code-*` in `global.css` maps identifiers to ink, keywords and strings to accent, comments and punctuation to muted, and the block ground to paper. No vendor syntax theme ships with the site.
 
 ## Typography
 
@@ -136,9 +205,16 @@ Cool navy and steel blue on warm cream. The warmth lives only in the paper, so t
 ### Hierarchy
 - **Display** (400, clamp(64px, 9vw, 90px), 1.1): page `h1`, uppercase, VT323.
 - **Headline** (400, 42px, 36px on mobile, 1.1): section titles, uppercase, VT323.
-- **Title** (700, 16px, 1.1): card and item headings, Maple Mono.
-- **Body** (400, 14px, 1.75): all running text. Page-heading paragraphs cap at 620px.
-- **Label** (700, 9-10px, 0.7-1.3px tracking, uppercase): eyebrows, chips, buttons, text links. Window-bar titles use 11px bold, not uppercase.
+- **Card display** (400, 46px, 30-42px when the panel is narrower, 1.1): the one pixel-face heading a feature panel may carry (project name, laptop name, font specimen), VT323.
+- **Card title** (400, 24px, 1.45; 18px on mobile): the featured post's title, Maple Mono.
+- **Prose heading** (700, 21px, 1.4): `h2`-`h4` inside an article, Maple Mono.
+- **List title** (400, 18px, 1.6): post titles in the blog grid.
+- **Title** (700, 16px, 1.1-1.25): card, item, row and empty-state headings, Maple Mono.
+- **Body** (400, 14px, 1.75): all running text. Page-heading paragraphs cap at 620px; articles cap near 70 characters.
+- **Secondary** (400, 13px): hero intro, section intros, directory row titles.
+- **Support** (400, 12px): descriptions inside cards and windows, footer-level copy.
+- **Meta** (400-700, 11px): dates, window-bar titles, button labels, text links, footer links.
+- **Label** (700, 9-10px, 0.7-1.3px tracking, uppercase): eyebrows and chips.
 
 ### Named Rules
 **The Pixel Is For Headings Rule.** VT323 appears only on `h1` and section `h2`, always uppercase. Window titles and everything else stay in Maple Mono.
@@ -155,6 +231,7 @@ Depth is flat-graphic. Windows and buttons carry a hard offset shadow with no bl
 
 ### Shadow Vocabulary
 - **Window** (`box-shadow: 4px 4px 0 var(--shadow)`): windows and large panels.
+- **Card rest** (`4px 4px 0 var(--shadow)`): post cards and other window-like links, so depth never appears only on hover. Hover grows to `5px 6px 0` with `translate(-1px, -3px)`; active presses to `1px 1px 0` with `translate(2px, 2px)`.
 - **Button rest** (`3px 3px 0 var(--shadow)`): buttons.
 - **Button hover** (`4px 5px 0 var(--shadow)`) with `translate(-1px, -2px)`.
 - **Button pressed** (`1px 1px 0 var(--shadow)`) with `translate(2px, 2px)`.
@@ -186,6 +263,12 @@ Square, always. Zero radius on windows, buttons, chips and window controls. Stru
 - **Text link:** 10px uppercase bold, dashed hairline underline, trailing arrow that moves 3px on hover or focus, color shifts to accent.
 - **Inline link:** inherits color, underline offset 5px.
 
+### Directory list (inside a window)
+- Rows of links separated by 1px hairline borders, flush to the window edges, 15-16px padding, never boxes nested inside the window. Each row carries a bold 16px label, muted secondary text, and a trailing arrow that moves 2-3px on hover or focus; the whole row tints to Pale Window Blue. The focus ring sits inside the row (`outline-offset: -3px`) so it never crosses the window border. Used for the social links, the article's newer/older navigation, and the 404 destinations.
+
+### Empty states
+- A surface with no data yet gets one window that names when data starts and what will appear, with a 46-64px pixel icon beside the copy. Zero-value statistics, blank charts, and repeated "nothing logged yet" lines are removed until there is data to show; the sections return automatically when the first record lands.
+
 ### Navigation
 - Pixel monitor icon plus `alfatta.rezqa` wordmark (16px bold, tight tracking) with a 9px tracked "SOFTWARE DEVELOPER" sublabel. Nav links are 12px; hover, focus and the current page show a 2px accent underline that scales in from the left over 0.2s. The theme toggle sits last. On mobile the header wraps and links drop to 10px.
 
@@ -198,9 +281,13 @@ Square, always. Zero radius on windows, buttons, chips and window controls. Stru
 - **Do** use `--accent` as the sole accent and read all colors from the CSS custom properties so both themes work.
 - **Do** use the 3px solid accent focus ring with 5px offset on every interactive element.
 - **Do** keep content visible without JavaScript, and respect `prefers-reduced-motion`.
+- **Do** end every page with its next step: the contact banner, or the article's newer/older navigation.
+- **Do** cap running text at roughly 65-75 characters (`max-width: 62ch` on card copy, a 700px article column).
 
 ### Don't:
 - **Don't** use border radius, blurred or soft shadows, gradients as fills, or glass effects.
 - **Don't** bold VT323 or use it for body or UI text.
 - **Don't** introduce a second accent hue, pure white, or pure black.
 - **Don't** apply pointer-following motion on touch layouts.
+- **Don't** nest bordered cards inside a window, or ship a card whose shadow only appears on hover.
+- **Don't** show a counter, chart, or table of zeroes in place of an empty state.

@@ -6,7 +6,7 @@ import PixelIcon from "./PixelIcon.astro";
 interface Props {
   post: CollectionEntry<"blog">;
   index?: number;
-  variant?: "compact" | "detailed";
+  variant?: "compact" | "detailed" | "featured";
   headingLevel?: "h2" | "h3";
 }
 const {
@@ -15,15 +15,19 @@ const {
   variant = "compact",
   headingLevel: Heading = "h3",
 } = Astro.props;
+const detailed = variant === "detailed" || variant === "featured";
 const icons: IconName[] = ["code", "chip", "disk", "monitor"];
 ---
 
 <a
-  class:list={["post-card", { "post-card--detailed": variant === "detailed" }]}
+  class:list={[
+    "post-card",
+    { "post-card--detailed": detailed, "post-card--featured": variant === "featured" },
+  ]}
   href={`/blog/${post.id}/`}
   data-reveal
   data-track-event="post_click"
-  data-track-location={variant === "detailed" ? "blog-list" : "recent-posts"}
+  data-track-location={detailed ? "blog-list" : "recent-posts"}
   data-track-id={`post-${post.id}`}
   data-track-post-slug={post.id}
 >
@@ -36,7 +40,7 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
   <div class="post-copy">
     <FormattedDate date={post.data.pubDate} />
     <Heading class="post-title">{post.data.title}</Heading>
-    {variant === "detailed" && <p>{post.data.description}</p>}
+    {detailed && <p>{post.data.description}</p>}
     <span class="read-post">
       Read post <span aria-hidden="true">↗</span>
     </span>
@@ -48,6 +52,7 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
     text-decoration: none;
     border: 1px solid var(--line);
     background: var(--surface);
+    box-shadow: 4px 4px 0 var(--shadow);
     display: flex;
     flex-direction: column;
     transition:
@@ -55,8 +60,12 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
       box-shadow 0.15s;
   }
   .post-card:is(:hover, :focus-visible) {
-    transform: translateY(-4px);
-    box-shadow: 4px 5px 0 var(--shadow);
+    transform: translate(-1px, -3px);
+    box-shadow: 5px 6px 0 var(--shadow);
+  }
+  .post-card:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 var(--shadow);
   }
   .post-art {
     height: 110px;
@@ -109,6 +118,7 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
   .post-copy p {
     font-size: 12px;
     color: var(--muted);
+    max-width: 62ch;
     margin-bottom: 16px;
   }
   .post-copy .read-post {
@@ -126,6 +136,52 @@ const icons: IconName[] = ["code", "chip", "disk", "monitor"];
   }
   .post-card--detailed .post-copy {
     padding: 20px;
+  }
+  .post-card--featured {
+    display: grid;
+    grid-template-columns: minmax(0, 0.7fr) minmax(0, 1fr);
+    min-height: 230px;
+  }
+  .post-card--featured .post-art {
+    height: auto;
+    border-bottom: 0;
+    border-right: 1px solid var(--line);
+  }
+  .post-card--featured .post-art :global(svg) {
+    width: 92px;
+    height: 92px;
+  }
+  .post-card--featured .post-copy {
+    justify-content: center;
+    padding: 28px;
+  }
+  .post-card--featured .post-copy :global(.post-title) {
+    font-size: 24px;
+    line-height: 1.45;
+    margin: 10px 0 14px;
+  }
+  .post-card--featured .post-copy p {
+    font-size: 13px;
+  }
+  .post-card--featured .post-copy .read-post {
+    margin-top: 6px;
+  }
+  @media (max-width: 700px) {
+    .post-card--featured {
+      grid-template-columns: minmax(0, 1fr);
+      min-height: 0;
+    }
+    .post-card--featured .post-art {
+      height: 130px;
+      border-right: 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .post-card--featured .post-copy {
+      padding: 20px;
+    }
+    .post-card--featured .post-copy :global(.post-title) {
+      font-size: 18px;
+    }
   }
   @media (max-width: 900px) {
     .post-copy {
