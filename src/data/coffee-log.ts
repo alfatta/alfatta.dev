@@ -19,4 +19,13 @@ export const COFFEE_START = "2026-11-27";
 // One object per cup, appended in any order; the page sorts them.
 // { date: "2026-11-27", time: "07:40", drink: "Iced americano", place: "home" },
 // { date: "2026-11-27", time: "14:30", drink: "V60 Ethiopia", place: "cafe", venue: "Starbucks" },
-export const coffeeCups: CoffeeCup[] = [];
+export const coffeeCups: CoffeeCup[] = [
+  {
+    date: "2026-11-27",
+    time: "20:40",
+    drink: "Hot kopi susu",
+    place: "office",
+    venue: "Bleum Coffee Pacific Place",
+    photo: "2026-11-27-2040.jpg",
+  },
+];
