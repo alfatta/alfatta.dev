@@ -67,6 +67,7 @@ const stats = [
             <p class="eyebrow">Activity map</p>
             <CoffeeHeatmap
               weeks={heatmap}
+              fill
               label="Heatmap of daily coffee: no cups logged yet."
             />
           </div>
@@ -88,6 +89,7 @@ const stats = [
               <div class="window-content">
                 <CoffeeHeatmap
                   weeks={heatmap}
+                  fill
                   label={`Heatmap of daily coffee: ${cupLabel(summary.total)} over ${summary.daysLogged} logged days.`}
                 />
               </div>

@@ -5,13 +5,19 @@ interface Props {
   weeks: HeatCell[][];
   /** Accessible summary; the cells themselves are decorative. */
   label: string;
+  /** Stretch the map across its window instead of capping cells at 30px. */
+  fill?: boolean;
 }
 
-const { weeks, label } = Astro.props;
+const { weeks, label, fill = false } = Astro.props;
 ---
 
 <figure class="heatmap" role="img" aria-label={label}>
-  <div class="heatmap-body" style={`--weeks: ${weeks.length}`} aria-hidden="true">
+  <div
+    class:list={["heatmap-body", { "heatmap-body--fill": fill }]}
+    style={`--weeks: ${weeks.length}`}
+    aria-hidden="true"
+  >
     <ol class="heatmap-days">
       {["S", "M", "T", "W", "T", "F", "S"].map((day) => <li>{day}</li>)}
     </ol>
@@ -46,6 +52,9 @@ const { weeks, label } = Astro.props;
     display: flex;
     gap: 8px;
     width: min(100%, calc(var(--weeks) * 30px + 22px));
+  }
+  .heatmap-body--fill {
+    width: 100%;
   }
   .heatmap-days {
     display: grid;
@@ -150,5 +159,16 @@ const { weeks, label } = Astro.props;
   }
   .heatmap-legend .heat-cell:last-of-type {
     margin-right: 4px;
+  }
+  @media (max-width: 600px) {
+    /* Cells shrink with the viewport, so the gaps shrink with them. */
+    .heatmap-days,
+    .heatmap-grid,
+    .heatmap-week {
+      gap: 2px;
+    }
+    .heatmap-body {
+      gap: 6px;
+    }
   }
 </style>
