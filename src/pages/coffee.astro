@@ -1,0 +1,335 @@
+---
+import SiteLayout from "../layouts/SiteLayout.astro";
+import WindowBar from "../components/WindowBar.astro";
+import CoffeeHeatmap from "../components/CoffeeHeatmap.astro";
+import CoffeeStats from "../components/CoffeeStats.astro";
+import CoffeeBars from "../components/CoffeeBars.astro";
+import CoffeePhoto from "../components/CoffeePhoto.astro";
+import { SITE_TITLE } from "../consts";
+import { buildHeatmap, formatHour, getCoffeeSummary } from "../data/coffee";
+
+const summary = getCoffeeSummary();
+const heatmap = buildHeatmap(summary, 26, 26);
+const peakMax = Math.max(1, summary.peakCount);
+const cupLabel = (n: number) => `${n} ${n === 1 ? "cup" : "cups"}`;
+const stats = [
+  { label: "Total cups", value: summary.total },
+  { label: "Today", value: summary.todayCount },
+  { label: "Avg per day", value: summary.averagePerDay.toFixed(1) },
+  { label: "Streak", value: `${summary.streak}d` },
+];
+---
+
+<SiteLayout
+  title={`Coffee — Alfatta Rezqa | ${SITE_TITLE}`}
+  description="A cup-by-cup log of the coffee Alfatta Rezqa drinks every day: what, when and where."
+>
+  <main id="main" class="site-width page-main coffee-page">
+    <header class="page-heading" data-reveal>
+      <h1>What I drink.</h1>
+      <p>Every cup of coffee I drink: what it was, when, and where.</p>
+    </header>
+
+    <section aria-labelledby="overview-title" data-track-location="coffee-overview">
+      <div class="section-title" data-reveal>
+        <div>
+          <h2 id="overview-title">Overview</h2>
+        </div>
+      </div>
+      <div class="overview-grid">
+        <div class="window" data-reveal>
+          <WindowBar>
+            <span>▦ &nbsp; activity.map</span>
+          </WindowBar>
+          <div class="window-content">
+            <CoffeeHeatmap
+              weeks={heatmap}
+              label={`Heatmap of daily coffee: ${cupLabel(summary.total)} over ${summary.daysLogged} logged days.`}
+            />
+          </div>
+        </div>
+        <div class="window" data-reveal>
+          <WindowBar>
+            <span>▤ &nbsp; stats.sys</span>
+          </WindowBar>
+          <div class="window-content">
+            <CoffeeStats items={stats} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="patterns-title" data-track-location="coffee-patterns">
+      <div class="section-title" data-reveal>
+        <div>
+          <h2 id="patterns-title">Patterns</h2>
+        </div>
+      </div>
+      <div class="patterns-grid">
+        <div class="window hours-window" data-reveal>
+          <WindowBar>
+            <span>▥ &nbsp; peak-hours.chart</span>
+          </WindowBar>
+          <div class="window-content">
+            {summary.peakHour === null ? (
+              <p class="muted">Nothing logged yet.</p>
+            ) : (
+              <>
+                <ol class="hours" aria-label="Cups by hour of day">
+                  {summary.hours.map((count, hour) => (
+                    <li title={`${formatHour(hour)} · ${cupLabel(count)}`} style={`--share: ${(count / peakMax) * 100}%`}>
+                      <span class="hour-bar"></span>
+                      <span class="sr-only">{formatHour(hour)}: {cupLabel(count)}</span>
+                    </li>
+                  ))}
+                </ol>
+                <div class="hours-axis" aria-hidden="true">
+                  <span>00</span><span>06</span><span>12</span><span>18</span><span>23</span>
+                </div>
+                <p class="muted">Peak at {formatHour(summary.peakHour)} · {cupLabel(summary.peakCount)}</p>
+              </>
+            )}
+          </div>
+        </div>
+        <div class="window" data-reveal>
+          <WindowBar>
+            <span>▤ &nbsp; places.txt</span>
+          </WindowBar>
+          <div class="window-content">
+            <CoffeeBars items={summary.places} />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="log-title" data-track-location="coffee-log">
+      <div class="section-title" data-reveal>
+        <div>
+          <h2 id="log-title">Daily log</h2>
+        </div>
+      </div>
+      {summary.months.length === 0 ? (
+        <p class="muted" data-reveal>No cups logged yet. The first entry lands here.</p>
+      ) : (
+        summary.months.map((month, index) => (
+          <details class="month" open={index === 0} data-reveal>
+            <summary>
+              <span>{month.label}</span>
+              <span class="chip">{cupLabel(month.total)}</span>
+            </summary>
+            <div class="window">
+              <WindowBar>
+                <span>▤ &nbsp; {month.key}.log</span>
+                <span slot="trailing">{cupLabel(month.total).toUpperCase()}</span>
+              </WindowBar>
+              <ol class="cups">
+                {month.days.flatMap((day) =>
+                  day.cups.map((cup, i) => (
+                    <li class:list={{ "day-start": i === 0 }}>
+                      <span class="cup-date">{i === 0 && `${day.weekday.slice(0, 3)} ${day.date.slice(8)}`}</span>
+                      <time class="cup-time">{cup.time}</time>
+                      <span class="cup-drink">
+                        {cup.drink}
+                        {cup.venue && <small>{cup.venue}</small>}
+                        {cup.note && <small>{cup.note}</small>}
+                      </span>
+                      <span class="chip">{cup.place}</span>
+                      <span class="cup-thumb"><CoffeePhoto cup={cup} /></span>
+                    </li>
+                  )),
+                )}
+              </ol>
+            </div>
+          </details>
+        ))
+      )}
+    </section>
+  </main>
+  <dialog class="lightbox window" id="coffee-lightbox" aria-label="Coffee photo">
+    <WindowBar>
+      <span id="coffee-lightbox-caption">▧ &nbsp; photo</span>
+      <form method="dialog" slot="trailing">
+        <button class="lightbox-close" aria-label="Close photo">×</button>
+      </form>
+    </WindowBar>
+    <img alt="" />
+  </dialog>
+</SiteLayout>
+
+<style>
+  .coffee-page {
+    padding-bottom: clamp(30px, 5vw, 60px);
+  }
+  .muted {
+    color: var(--muted);
+  }
+  .overview-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    gap: 16px;
+  }
+  .patterns-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+  .hours {
+    display: grid;
+    grid-template-columns: repeat(24, minmax(0, 1fr));
+    gap: 2px;
+    height: 110px;
+    margin: 0 0 6px;
+    padding: 0;
+    list-style: none;
+  }
+  .hours li {
+    display: flex;
+    align-items: flex-end;
+    border-bottom: 1px solid var(--line);
+  }
+  .hour-bar {
+    display: block;
+    width: 100%;
+    height: max(var(--share), 2px);
+    background: var(--accent);
+    opacity: 0.9;
+  }
+  .hours-axis {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 10px;
+    color: var(--muted);
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+  }
+  .month {
+    margin-bottom: 24px;
+  }
+  .month > summary {
+    margin-bottom: 14px;
+    padding: 6px 0;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .month > summary .chip {
+    margin-left: 12px;
+  }
+  .cups {
+    margin: 0;
+    padding: 0 18px;
+    list-style: none;
+  }
+  .cups li {
+    display: grid;
+    grid-template-columns: 64px 52px minmax(0, 1fr) auto 44px;
+    align-items: center;
+    gap: 14px;
+    padding: 9px 0;
+    border-top: 1px dashed var(--line);
+  }
+  .cups li:first-child {
+    border-top: 0;
+  }
+  .cups li.day-start:not(:first-child) {
+    border-top: 1px solid var(--line);
+  }
+  .cup-date {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .cup-time {
+    color: var(--muted);
+  }
+  .cup-drink small {
+    margin-left: 10px;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .chip {
+    padding: 2px 9px;
+    border: 1px solid var(--line);
+    background: var(--blue);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+  }
+  @media (max-width: 900px) {
+    .patterns-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+  }
+  @media (max-width: 700px) {
+    .overview-grid {
+      grid-template-columns: minmax(0, 1fr);
+    }
+    .cups li {
+      grid-template-columns: 52px 46px minmax(0, 1fr);
+      gap: 4px 10px;
+    }
+    .cups li .chip,
+    .cups li .cup-thumb {
+      grid-column: 3;
+      justify-self: start;
+    }
+    .cup-thumb:empty {
+      display: none;
+    }
+  }
+  .cup-thumb {
+    line-height: 0;
+  }
+  .lightbox {
+    padding: 0;
+    margin: auto;
+    color: var(--ink);
+    max-width: min(92vw, 560px);
+  }
+  .lightbox::backdrop {
+    background: rgb(17 30 48 / 0.65);
+  }
+  .lightbox img {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    max-height: 78vh;
+    margin-inline: auto;
+  }
+  .lightbox-close {
+    width: 15px;
+    height: 15px;
+    padding: 0;
+    border: 1px solid var(--line);
+    background: var(--surface);
+    font-size: 11px;
+    line-height: 13px;
+  }
+</style>
+
+<script>
+  const dialog = document.querySelector<HTMLDialogElement>("#coffee-lightbox");
+  const image = dialog?.querySelector("img");
+  const caption = document.querySelector("#coffee-lightbox-caption");
+
+  // Without JS the thumbnail is a plain link to the full-size image.
+  document.addEventListener("click", (event) => {
+    if (!dialog || !image || !caption || !(event.target instanceof Element)) return;
+    const link = event.target.closest<HTMLAnchorElement>("a[data-lightbox]");
+    if (link) {
+      event.preventDefault();
+      image.src = link.href;
+      image.alt = link.dataset.alt ?? "";
+      caption.textContent = `▧   ${link.dataset.alt ?? "photo"}`;
+      dialog.showModal();
+    } else if (event.target === dialog) {
+      dialog.close();
+    }
+  });
+</script>

@@ -12,6 +12,7 @@ I'm **Alfatta Rezqa**, a software developer with a frontend focus and a full-sta
 - **[About](https://alfatta.dev/about/)** — my engineering background, teaching and mentoring experience, toolkit, and side projects.
 - **[Blog](https://alfatta.dev/blog/)** — notes on frontend development, Vue, personal tooling, and lessons from building software. Also available via [RSS](https://alfatta.dev/rss.xml).
 - **[Uses](https://alfatta.dev/uses/)** — an illustrated inventory of my daily-driver gear, development tools, and favorite coding font.
+- **[Coffee](https://alfatta.dev/coffee/)** — a cup-by-cup log of the coffee I drink: activity heatmap, stats, peak hours and cups per place, and a daily log. A summary also appears on Home.
 - **[Contact](https://alfatta.dev/contact/)** — ways to reach me and connect elsewhere online.
 
 The portfolio includes my contributions to **Ajaib Terminal**, a desktop stock trading application built with the Ajaib team, and **PixRelay**, an image processing service.
@@ -32,6 +33,7 @@ Built with Astro and Tailwind CSS, with Markdown and MDX for writing.
 
 - `src/pages/` composes the pages; `src/layouts/` provides the shared site and article layouts.
 - `src/data/profile.ts` holds profile details, typed contact links, and portfolio projects. `src/data/experience.ts` holds career history and the selectors that preserve its curated order.
+- `src/data/coffee-log.ts` holds the coffee log: add one `{ date, time, drink, place, venue?, note?, photo? }` object per cup (`photo` is a file name in `src/assets/coffee/`, any ratio; thumbnails crop to a square and open a lightbox) to `coffeeCups` (dates in Asia/Jakarta). `src/data/coffee.ts` derives the stats, heatmap and monthly grouping at build time, so the site must be rebuilt to show new cups.
 - `src/components/` contains the reusable UI, including the shared window bar and theme toggle. Theme initialization stays in the document head so the saved preference is applied before the page appears.
 - `src/content/blog/` contains the writing; shared colors, typography, and layout styles live in `src/styles/global.css`.
 - `src/components/BaseHead.astro` loads the deferred Umami Cloud tracker and the asynchronous Ahrefs Analytics script on every page.
@@ -47,7 +49,7 @@ Umami keeps its automatic pageviews. `src/scripts/analytics.ts` additionally sen
 | --- | --- |
 | `navigation_click` | Logo, main navigation, skip-to-content, footer Contact |
 | `theme_change` | Theme toggle; records the applied theme |
-| `cta_click` | Hero, About/Experience previews, experience rows, All posts, Contact banners, Contact signoff |
+| `cta_click` | Hero, About/Experience/Coffee previews, experience rows, All posts, Contact banners, Contact signoff |
 | `project_link_click` | Project destinations, including Ajaib Terminal and PixRelay |
 | `experience_link_click` | Work/teaching links and LinkedIn experience |
 | `post_click` | Article cards on Home and Blog, Manjaro guide link in the About toolkit |
