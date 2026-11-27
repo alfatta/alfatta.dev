@@ -23,7 +23,7 @@ export const coffeeCups: CoffeeCup[] = [
   {
     date: "2026-11-27",
     time: "20:40",
-    drink: "Hot kopi susu",
+    drink: "Hot Kopi Susu",
     place: "office",
     venue: "Bleum Coffee Pacific Place",
     photo: "2026-11-27-2040.jpg",
