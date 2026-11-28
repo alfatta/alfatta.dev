@@ -28,4 +28,12 @@ export const coffeeCups: CoffeeCup[] = [
     venue: "Bleum Coffee",
     photo: "2026-11-27-1300.jpg",
   },
+  {
+    date: "2026-11-28",
+    time: "11:53",
+    drink: "Kopi Kenangan Mantan",
+    place: "home",
+    venue: "Kopi Kenangan",
+    photo: "2026-11-28-1153.png",
+  },
 ];
